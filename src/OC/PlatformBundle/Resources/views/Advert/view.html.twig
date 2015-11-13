@@ -1,0 +1,108 @@
+{# src/OC/PlatformBundle/Resources/view/Advert/view.html.twig #}
+
+{% extends "OCPlatformBundle::layout.html.twig" %}
+
+{% block title %}
+  Lecture d'une annonce - {{ parent() }}
+{% endblock %}
+
+{% block ocplatform_body %}
+	{# On vérifie qu'une image soit bien associée à l'annonce #}
+	{% for message in app.session.flashbag.get("notice") %}
+		<p>{{ message }}</p>
+	{% endfor%}
+	{% if advert.image is not null %}
+	  	<img src="{{ asset(advert.image.PathView) }}" alt="{{ advert.image.alt }}">
+	{% endif %}
+	
+  	<h2>{{ advert.title }}</h2>
+  	<i>Par {{ advert.author }}, le {{ advert.date|date('d/m/Y') }}</i>
+
+  	<div class="well">
+  		<div class="row">
+  			<div class="col-sm-6 col-md-6">
+    		{{ advert.content }}
+    		</div>
+    	</div>
+    	<div class="row">
+    		<div class="col-sm-6 col-md-6">
+		  		<a href=""><span class="glyphicon glyphicon-heart" style="color:white;cursors:pointer;"></span></a>
+		  	</div>
+    	</div>
+    	<div class="row">
+    		<div class="col-sm-6 col-md-6">
+		  		 {{ form_start(form, {'attr': {'class': 'form-horizontal'}}) }}
+			  		<div class="form-group">
+			      		{{ form_label(form.commentaire, "Commentaire :", {'label_attr': {'class': 'col-sm-3 control-label'}}) }}
+				      	{{ form_errors(form.commentaire) }}
+				      	<div class="col-sm-9">
+				        	{{ form_widget(form.commentaire, {'attr': {'class': 'form-control'}}) }}
+				      	</div>
+				    </div>
+				    {{ form_widget(form.save, {'attr': {'class': 'btn btn-primary pull-right col-sm-2','style':'margin-right:5px;'}}) }}
+			  		{# 	Génération automatique des champs pas encore écrits.
+				     	Dans cet exemple, ce serait le champ CSRF (géré automatiquement par Symfony !)
+				     	et tous les champs cachés (type « hidden »). #}
+				  	{{ form_rest(form) }}
+			  	{{ form_end(form) }}
+		  	</div>
+    	</div>
+  	</div>
+  	
+  	<div class="well">
+  		<h4>Spécification(s) de l'annonce :</h4>
+	  	<div class="well">
+			<h4>Catégorie(s) :</h4>
+		  	{% if advert.categories  is not null%}
+	    		Cette annonce concerne les catégorie(s) suivante(s) :
+				<ul>
+		      		{% for advCat in advert.categories %}
+		        		<li>{{ advCat.name }}</li>
+		      		{% endfor %}
+		   	 	</ul>
+			{% endif %}
+		</div>
+		<div class="well">
+			<h4>Compétence(s) :</h4>
+		  	{% if listAdvertSkills|length > 0 %}
+				Cette annonce requiert les compétence(s) suivante(s) :
+				<ul>
+		      		{% for advertSkill in listAdvertSkills %}
+		        		<li>{{ advertSkill.skill.name }} : niveau {{ advertSkill.level }}</li>
+		      		{% endfor %}
+		   	 	</ul>
+			{% endif %}
+		</div>
+		<div class="well">
+			<h4>Candidature(s) :</h4>
+	    	{% if advert.applications is not null %}
+	    		{% for app in advert.applications %}
+	    			<div class="well">
+				    	{{ app.content }}
+				    	<i>Par {{ app.author }}, le {{ app.date|date('d/m/Y') }}</i>
+				  	</div>
+	    		{% endfor %}
+	    	{% endif %}
+	  	</div>
+  	</div>
+  	<p>
+    	<a href="{{ path('oc_platform_home') }}" class="btn btn-default">
+      		<i class="glyphicon glyphicon-chevron-left"></i>
+      		Retour à la liste
+    	</a>
+    	<a href="{{ path('oc_platform_candidature', {'id':advert.id}) }}" class="btn btn-default">
+      		<i class="glyphicon glyphicon-chevron-left"></i>
+      		Postuler pour cette annonce
+    	</a>
+    	{% if is_granted("ROLE_ADMIN") %}
+	    	<a href="{{ path('oc_platform_edit', {'id': advert.id}) }}" class="btn btn-default">
+	     		<i class="glyphicon glyphicon-edit"></i>
+	      		Modifier l'annonce
+	   	 	</a>
+	    	<a href="{{ path('oc_platform_delete', {'id': advert.id}) }}" class="btn btn-danger">
+	      		<i class="glyphicon glyphicon-trash"></i>
+	      		Supprimer l'annonce
+	    	</a>
+    	{% endif %}
+  	</p>
+{% endblock %}

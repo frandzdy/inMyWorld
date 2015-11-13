@@ -1,0 +1,3 @@
+# oc_chat_homepage:
+    # path:     /hello/{name}
+    # defaults: { _controller: OCChatBundle:Chat:index }

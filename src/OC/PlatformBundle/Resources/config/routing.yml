@@ -1,0 +1,74 @@
+# src/OC/PlatformBundle/Resources/config/routing.yml
+
+oc_platform_home:
+    path:      /
+    defaults:  { _controller: OCPlatformBundle:Advert:index }
+
+oc_platform_view:
+    path:      /advert/{id}
+    defaults:  { _controller: OCPlatformBundle:Advert:view }
+    requirements:
+        id: \d+
+
+oc_platform_add:
+    path:      /add/
+    defaults:  { _controller: OCPlatformBundle:Advert:add }
+
+oc_platform_edit:
+    path:      /edit/{id}
+    defaults:  { _controller: OCPlatformBundle:Advert:edit }
+    requirements:
+        id: \d+
+        
+oc_platform_addUser:
+    path:      /create/
+    defaults:  { _controller: OCPlatformBundle:Advert:create }
+
+oc_platform_editUser:
+    path:      /editCompte/{id}
+    defaults:  { _controller: OCPlatformBundle:Advert:editCompte }
+    requirements:
+        id: \d+
+          
+oc_platform_afficheUser:
+    path:      /affiche/
+    defaults:  { _controller: OCPlatformBundle:Advert:afficheUser }
+  
+oc_platform_deleteUser:
+    path:      /deleteCompte/{id}
+    defaults:  { _controller: OCPlatformBundle:Advert:deleteCompte }
+    requirements:
+        id: \d+    
+        
+oc_platform_delete:
+    path:      /delete/{id}
+    defaults:  { _controller: OCPlatformBundle:Advert:delete }
+    requirements:
+        id: \d+
+
+oc_platform_candidature:
+    path:      /candidature/{id}
+    defaults:  { _controller: OCPlatformBundle:Advert:candidature }
+    requirements:
+        id: \d+
+
+oc_platform_recherche:
+    path: /search/
+    defaults: { _controller: OCPlatformBundle:Advert:recherche }
+    
+oc_platform_searchView:
+    path: /searchAffiche/
+    defaults: { _controller:OCPlatformBundle:Advert:searchview }
+
+oc_platform_excel:
+    path: /excel/
+    defaults: { _controller:OCPlatformBundle:Advert:excel }
+
+oc_chat_main:
+    path:     /hello/{name}
+    defaults: { _controller: OCChatBundle:Chat:index }
+
+oc_chat_ajax:
+    path:     /ajax/
+    defaults: { _controller: OCChatBundle:Chat:ajax }
+   

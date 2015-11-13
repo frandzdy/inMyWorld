@@ -1,0 +1,16 @@
+<<<<<<< HEAD
+{
+"version": 3,
+"mappings": ";;;;;AAYA,IAAI;EACH,UAAU,EAAE,KAAK;;AAElB,IAAI;EACH,UAAU,EAAE,KAAK;EANjB,MAAM,EAAE,2BAA8B;EAQtC,KAAK,EAAE,GAAG;;AAEX,QAAQ;EAVP,MAAM,EAAE,2BAA8B;;AAavC,UAAU;EACT,KAAK,EAAE,GAAG",
+"sources": ["../sass/screen.sass"],
+"names": [],
+"file": "screen.css"
+=======
+{
+"version": 3,
+"mappings": ";;;;;AAYA,IAAI;EACH,UAAU,EAAE,KAAK;;AAElB,IAAI;EACH,UAAU,EAAE,KAAK;EANjB,MAAM,EAAE,2BAA8B;EAQtC,KAAK,EAAE,GAAG;;AAEX,QAAQ;EAVP,MAAM,EAAE,2BAA8B;;AAavC,UAAU;EACT,KAAK,EAAE,GAAG",
+"sources": ["../sass/screen.sass"],
+"names": [],
+"file": "screen.css"
+>>>>>>> 7c65521e4c87adb26903467de32536bce2322b0b
+}

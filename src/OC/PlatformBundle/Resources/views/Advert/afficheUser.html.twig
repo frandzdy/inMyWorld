@@ -1,0 +1,47 @@
+{# src/OC/PlatformBundle/Resources/views/Advert/edit.html.twig #}
+
+{% extends "OCPlatformBundle::layout.html.twig" %}
+
+{% block title %}
+  Liste des utilisateurs - {{ parent() }}
+{% endblock %}
+
+{% block ocplatform_body %}
+
+  <h2>Liste des utilisateurs </h2>
+  	
+	{% if users is not null%}
+		<div class="table-responsive">
+			<table class="table table-striped">
+				<thead>
+					<tr>
+						<th>Photo</th><th>Nom</th><th>E-mail</th><th>Roles</th><th>Actif / Inactif</th><th>Info compte</th>
+					</tr>
+				</thead>
+				<tbody>
+				{% for user in users %}
+		  			<tr >
+		  				<td>
+		  					{% if user.image is not null %}
+							  	<img src="{{ asset(user.image.PathView)}}" alt="{{ user.image.alt }}">
+							{% endif %}
+						</td>
+		  				<td>{{ user.username}}</td>
+		  				<td>{{ user.email}}</td>
+		  				<td>{% for urole in user.roles %}{{ urole }}{% if not loop.last%},{%endif%}{%else%}Aucun droit a été défini pour cette utilisateur{% endfor %}</td>
+		  				<td>{{ user.enabled}}</td>
+		  				<td><a class="btn btn-link icon-user" href={{ path('oc_platform_editUser', {'id':user.id})}}>Voir le compte</a></td>
+		  			</tr>
+	  			{% endfor %}
+	  			</tbody>
+	  		</table>
+	  	</div>
+	{% endif %}
+  <p>
+    <a href="{{ path('oc_platform_home') }}" class="btn btn-default">
+      <i class="glyphicon glyphicon-chevron-left"></i>
+      Retour à l'accueil
+    </a>
+  </p>
+
+{% endblock %}

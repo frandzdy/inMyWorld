@@ -1,0 +1,16 @@
+<<<<<<< HEAD
+{
+"version": 3,
+"mappings": "AAAA,IAAI;EACJ,UAAU,EAAC,KAAK",
+"sources": ["../sass/style.scss"],
+"names": [],
+"file": "style.css"
+=======
+{
+"version": 3,
+"mappings": "AAAA,IAAI;EACJ,UAAU,EAAC,KAAK",
+"sources": ["../sass/style.scss"],
+"names": [],
+"file": "style.css"
+>>>>>>> 7c65521e4c87adb26903467de32536bce2322b0b
+}

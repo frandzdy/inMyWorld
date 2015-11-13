@@ -1,0 +1,24 @@
+{# src/OC/PlatformBundle/Resources/views/Advert/edit.html.twig #}
+
+{% extends "OCPlatformBundle::layout.html.twig" %}
+
+{% block title %}
+  Création d'un compte - {{ parent() }}
+{% endblock %}
+
+{% block ocplatform_body %}
+	
+  {{ include("OCPlatformBundle:Advert:formCompte.html.twig") }}
+
+  <p>
+    Vous pouvez créer un compte utilisateur.
+  </p>
+
+  <p>
+    <a href="{{ path('oc_platform_home') }}" class="btn btn-default">
+      <i class="glyphicon glyphicon-chevron-left"></i>
+      Retour à l'accueil
+    </a>
+  </p>
+
+{% endblock %}
