@@ -5,4 +5,4 @@ php:
 - 5.5
 - 5.4
 - hhvm
-script: phpunit src/AppBundle/Controller/Test/Test.php
+script: phpunit src/AppBundle/Controller/Test/DefaultControllerTest.php
