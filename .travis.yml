@@ -14,7 +14,8 @@ before_install:
 
 install:
     - composer update
-    - app/console doctrine:fixtures:load
+    - php app/console doctrine:fixtures:load
+    - bin/phpunit src/
 
 notifications:
   email:
