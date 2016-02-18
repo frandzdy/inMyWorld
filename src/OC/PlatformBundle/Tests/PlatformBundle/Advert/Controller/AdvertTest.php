@@ -9,9 +9,16 @@ class AdvertTest extends WebTestCase
     public function testIndex()
     {
 //        $client = static::createClient();
-
-//        $crawler = $client->request('GET', '/hello/Fabien');
-// $crawler->filter('html:contains("Hello Fabien")')->count()
+//
+//        $crawler = $client->request('GET', '/');
+//        $form = $crawler->selectButton('submit')->form();
+//
+//// set some values
+//        $form['name'] = 'Lucas';
+//        $form['form_name[subject]'] = 'Hey there!';
+//
+//// submit the form
+//        $crawler = $client->submit($form);
         $this->assertEquals(42, 42);
     }
 }

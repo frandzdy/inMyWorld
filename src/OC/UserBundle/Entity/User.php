@@ -36,7 +36,7 @@ class User extends BaseUser
     /**
      * @var string
      *
-     * @ORM\Column(name="prenom", type="text")
+     * @ORM\Column(name="prenom", type="string" )
      * @Assert\length(min=2, minMessage="Le prénom doit faire au moins {{ limit }} caractères.")
      */
     private $prenom;
@@ -50,7 +50,7 @@ class User extends BaseUser
 //	 /**
 //     * @var string
 //     *
-//     * @ORM\Column(name="genre", type="text")
+//     * @ORM\Column(name="genre", type="string")
 //	 * @Assert\Valid()
 //     */
 //	private $genre;

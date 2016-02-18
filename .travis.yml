@@ -8,6 +8,7 @@ env:
 
 install:
     - composer update
+    - app/console doctrine:fixtures:load
 
 notifications:
   email:
