@@ -21,7 +21,6 @@ class LoadUser implements FixtureInterface
             // Le nom d'utilisateur et le mot de passe sont identiques
             $user->setUsername($name)
             ->setPassword(hash("sha512",$name))
-            ->setPrenom($name . " P")
             ->setEmail($name . "@yopmail.com")
             ->setEnabled(true)
             // On définit uniquement le role ROLE_USER qui est le role de base

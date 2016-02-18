@@ -22,7 +22,9 @@
         <server name="KERNEL_DIR" value="/path/to/your/app/" />
     </php>
     -->
-
+    <php>
+        <server name="KERNEL_DIR" value="../app" />
+    </php>
     <filter>
         <whitelist>
             <directory>../src</directory>

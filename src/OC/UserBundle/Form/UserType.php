@@ -21,7 +21,6 @@ class UserType extends AbstractType
     {
         $builder
             ->add('username', 'text')
-            ->add('prenom', 'text')
             ->add('email', 'email')
             ->add('emailCanonical', 'email')
             ->add('image', new ImageType())

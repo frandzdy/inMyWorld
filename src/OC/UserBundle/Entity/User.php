@@ -33,13 +33,6 @@ class User extends BaseUser
      */
     private $image;
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="prenom", type="string" )
-     * @Assert\length(min=2, minMessage="Le prénom doit faire au moins {{ limit }} caractères.")
-     */
-    private $prenom;
 //	 /**
 //     * @var string
 //     *
@@ -94,30 +87,6 @@ class User extends BaseUser
     public function getImage()
     {
         return $this->image;
-    }
-
-    /**
-     * Set prenom
-     *
-     * @param string $prenom
-     *
-     * @return User
-     */
-    public function setPrenom($prenom)
-    {
-        $this->prenom = $prenom;
-
-        return $this;
-    }
-
-    /**
-     * Get prenom
-     *
-     * @return string
-     */
-    public function getPrenom()
-    {
-        return $this->prenom;
     }
 
     /**
