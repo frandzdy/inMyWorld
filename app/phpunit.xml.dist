@@ -12,6 +12,8 @@
             <directory>../src/*/*Bundle/Tests</directory>
             <directory>../src/*/Bundle/*Bundle/Tests</directory>
             <directory>../src/*Bundle/Tests</directory>
+            <!--<directory>../src/OC/*Bundle/Tests</directory>-->
+            <!--<directory>../src/OC/*Bundle/Tests/Controller</directory>-->
         </testsuite>
     </testsuites>
 
