@@ -20,62 +20,58 @@ use Symfony\Component\Validator\Context\ExecutionContextInterface;
  */
 class User extends BaseUser
 {
-	/**
-	* @ORM\Column(name="id", type="integer")
-	* @ORM\Id
-	* @ORM\GeneratedValue(strategy="AUTO")
-	*/
-	protected $id;
-	
-	/**
-	 * @ORM\OneToOne(targetEntity="OC\PlatformBundle\Entity\Image", cascade={"persist","remove"})
-	 * @Assert\Valid()
-	 */
-	private $image;
-	/**
-   	* 
-   	* @ORM\OneToMany(targetEntity="OC\PlatformBundle\Entity\Commentaire", mappedBy="user")
-   	*/
-   	private $commentaires;
-	 /**
+    /**
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    protected $id;
+
+    /**
+     * @ORM\OneToOne(targetEntity="OC\PlatformBundle\Entity\Image", cascade={"persist","remove"})
+     * @Assert\Valid()
+     */
+    private $image;
+
+    /**
      * @var string
      *
      * @ORM\Column(name="prenom", type="text")
-	 * @Assert\length(min=2, minMessage="Le prénom doit faire au moins {{ limit }} caractères.")
+     * @Assert\length(min=2, minMessage="Le prénom doit faire au moins {{ limit }} caractères.")
      */
-	private $prenom;
-	 /**
-     * @var string
-     *
-     * @ORM\Column(name="date_naissance", type="datetime")
-	 * @Assert\datetime()
-     */
-	private $dateNaissance;
-	 /**
-     * @var string
-     *
-     * @ORM\Column(name="genre", type="text")
-	 * @Assert\Valid()
-     */
-	private $genre;
-	 /**
-     * @var string
-     *
-     * @ORM\Column(name="departement", type="integer")
-	 * @Assert\Valid()
-     */
-	private $departement;
-	
-	
-	
-	public function __construct()
-  	{
-    	// Par défaut, la date de l'annonce est la date d'aujourd'hui
-	    // $this -> date = new \Datetime();
-		// $this -> creator = "Frandzdy Sanon";
-		// $this -> categories = new ArrayCollection();
-		$this -> commentaires = new ArrayCollection();
-  	}
+    private $prenom;
+//	 /**
+//     * @var string
+//     *
+//     * @ORM\Column(name="date_naissance", type="datetime")
+//	 * @Assert\datetime()
+//     */
+//	private $dateNaissance;
+//	 /**
+//     * @var string
+//     *
+//     * @ORM\Column(name="genre", type="text")
+//	 * @Assert\Valid()
+//     */
+//	private $genre;
+//	 /**
+//     * @var string
+//     *
+//     * @ORM\Column(name="departement", type="integer")
+//	 * @Assert\Valid()
+//     */
+//	private $departement;
+
+
+    public function __construct()
+    {
+        parent::__construct();
+        // Par défaut, la date de l'annonce est la date d'aujourd'hui
+        // $this -> date = new \Datetime();
+        // $this -> creator = "Frandzdy Sanon";
+        // $this -> categories = new ArrayCollection();
+    }
+
     /**
      * Set image
      *

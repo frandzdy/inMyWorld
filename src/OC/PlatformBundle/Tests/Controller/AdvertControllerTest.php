@@ -4,7 +4,7 @@ namespace OC\PlatformBundle\Tests\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
-class DefaultControllerTest extends WebTestCase
+class AdvertControllerTest extends WebTestCase
 {
     public function testIndex()
     {

@@ -34,7 +34,7 @@ security:
                 path:     /
                 #always_remember_me: true
     access_control:
-        - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY, requires_channel: https }
-        - { path: ^/platform/create, roles: IS_AUTHENTICATED_ANONYMOUSLY, requires_channel: https }
+        - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY  } # requires_channel: https
+        - { path: ^/platform/create, roles: IS_AUTHENTICATED_ANONYMOUSLY } # , requires_channel: https
         - { path: ^/, roles: IS_AUTHENTICATED_FULLY }
         # tous le site nécessite une connexion en base

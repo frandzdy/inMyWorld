@@ -19,15 +19,13 @@ class LoadUser implements FixtureInterface
             $user = new User;
 
             // Le nom d'utilisateur et le mot de passe sont identiques
-            $user->setUsername($name);
-            $user->setPassword($name);
-            $user->setPrenom($name . " P");
-            $user->setEmail($name . "@yopmail.com");
-            $user->setEnabled(true);
-            // On ne se sert pas du sel pour l'instant
-//            $user->setSalt('');
+            $user->setUsername($name)
+            ->setPassword(hash("sha512",$name))
+            ->setPrenom($name . " P")
+            ->setEmail($name . "@yopmail.com")
+            ->setEnabled(true)
             // On définit uniquement le role ROLE_USER qui est le role de base
-            $user->setRoles(array('ROLE_ADMIN'));
+            ->setRoles(array('ROLE_ADMIN'));
 
             // On le persiste
             $manager->persist($user);
