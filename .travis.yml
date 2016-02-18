@@ -14,7 +14,7 @@ before_install:
 
 install:
     - composer update
-    - php app/console doctrine:fixtures:load --no-interaction
+    # - php app/console doctrine:fixtures:load --no-interaction
     - bin/phpunit src/
 
 notifications:
