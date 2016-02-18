@@ -6,6 +6,12 @@ php:
 env:
   - SYMFONY_VERSION=2.8.*
 
+services:
+  - mysql
+
+before_install:
+  - mysql -u root -e "create database IF NOT EXISTS symfony;" -uroot
+
 install:
     - composer update
     - app/console doctrine:fixtures:load
