@@ -1,5 +1,9 @@
 {# src/OC/PlatformBundle/Resources/views/Advert/form.html.twig #}
 
+{# Déclaration de variable #}
+{%  set tailleChamp = 7  %}
+
+
 {% if user.id is not null %}
     <h3>Modification d'un compte</h3>
 {% else %}
@@ -67,14 +71,18 @@
                 </div>
             </div>
             <div class="form-group">
-                {{ form_label(form.image, "Photo profile :", {'label_attr': {'class': 'col-sm-3 control-label'}}) }}
-                {{ form_errors(form.image) }}
+                {{ form_label(form.image.file, "Photo profile :", {'label_attr': {'class': 'col-sm-3 control-label'}}) }}
+                {{ form_errors(form.image.file) }}
                 <div class="col-sm-4">
-                    {{ form_widget(form.image, {'attr': {'class': 'form-control'}}) }}
+                    {{ form_widget(form.image.file, {'attr': {'class': 'form-control'}}) }}
                 </div>
-                <div class="col-sm-4">{{ form_row(form.image.file) }}</div>
+                {% if user.id is not null %}
+                    <div class="col-sm-5 pull-right">
+                        <a class=""
+                           href="{{ asset(user.image.pathView) }}">{{ user.image.alt }}<a/>
+                    </div>
+                {% endif %}
             </div>
-
             <div class="form-group">
                 {{ form_label(form.enabled, "Actif / Inactif :", {'label_attr': {'class': 'col-sm-3 control-label'}}) }}
                 {{ form_errors(form.enabled) }}

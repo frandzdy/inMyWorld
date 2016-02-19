@@ -54,6 +54,13 @@ class User extends BaseUser
 //	 * @Assert\Valid()
 //     */
 //	private $departement;
+//	 /**
+//     * @var string
+//     *
+//     * @ORM\Column(name="commentaire", type="string")
+//	 * @Assert\Valid()
+//     */
+//	private commentaire;
 
 
     public function __construct()
@@ -63,6 +70,7 @@ class User extends BaseUser
         // $this -> date = new \Datetime();
         // $this -> creator = "Frandzdy Sanon";
         // $this -> categories = new ArrayCollection();
+        // $this -> commentaires = new ArrayCollection();
     }
 
     /**
@@ -96,102 +104,103 @@ class User extends BaseUser
      *
      * @return User
      */
-    public function setDateNaissance($dateNaissance)
-    {
-        $this->dateNaissance = $dateNaissance;
+//    public function setDateNaissance($dateNaissance)
+//    {
+//        $this->dateNaissance = $dateNaissance;
+//
+//        return $this;
+//    }
+//
+//    /**
+//     * Get dateNaissance
+//     *
+//     * @return \DateTime
+//     */
+//    public function getDateNaissance()
+//    {
+//        return $this->dateNaissance;
+//    }
+//
+//    /**
+//     * Set genre
+//     *
+//     * @param string $genre
+//     *
+//     * @return User
+//     */
+//    public function setGenre($genre)
+//    {
+//        $this->genre = $genre;
+//
+//        return $this;
+//    }
+//
+//    /**
+//     * Get genre
+//     *
+//     * @return string
+//     */
+//    public function getGenre()
+//    {
+//        return $this->genre;
+//    }
+//
+//    /**
+//     * Set departement
+//     *
+//     * @param \int $departement
+//     *
+//     * @return User
+//     */
+//    public function setDepartement(\int $departement)
+//    {
+//        $this->departement = $departement;
+//
+//        return $this;
+//    }
+//
+//    /**
+//     * Get departement
+//     *
+//     * @return \int
+//     */
+//    public function getDepartement()
+//    {
+//        return $this->departement;
+//    }
 
-        return $this;
-    }
+//    /**
+//     * Add commentaire
+//     *
+//     * @param \OC\PlatformBundle\Entity\Commentaire $commentaire
+//     *
+//     * @return User
+//     */
+//    public function addCommentaire(\OC\PlatformBundle\Entity\Commentaire $commentaire)
+//    {
+//        $this->commentaires[] = $commentaire;
+//
+//        return $this;
+//    }
 
-    /**
-     * Get dateNaissance
-     *
-     * @return \DateTime
-     */
-    public function getDateNaissance()
-    {
-        return $this->dateNaissance;
-    }
+//    /**
+//     * Remove commentaire
+//     *
+//     * @param \OC\PlatformBundle\Entity\Commentaire $commentaire
+//     */
+//    public function removeCommentaire(\OC\PlatformBundle\Entity\Commentaire $commentaire)
+//    {
+//        $this->commentaires->removeElement($commentaire);
+//    }
+//
+//    /**
+//     * Get commentaires
+//     *
+//     * @return \Doctrine\Common\Collections\Collection
+//     */
+//    public function getCommentaires()
+//    {
+//        return $this->commentaires;
+//    }
 
-    /**
-     * Set genre
-     *
-     * @param string $genre
-     *
-     * @return User
-     */
-    public function setGenre($genre)
-    {
-        $this->genre = $genre;
-
-        return $this;
-    }
-
-    /**
-     * Get genre
-     *
-     * @return string
-     */
-    public function getGenre()
-    {
-        return $this->genre;
-    }
-
-    /**
-     * Set departement
-     *
-     * @param \int $departement
-     *
-     * @return User
-     */
-    public function setDepartement(\int $departement)
-    {
-        $this->departement = $departement;
-
-        return $this;
-    }
-
-    /**
-     * Get departement
-     *
-     * @return \int
-     */
-    public function getDepartement()
-    {
-        return $this->departement;
-    }
-
-    /**
-     * Add commentaire
-     *
-     * @param \OC\PlatformBundle\Entity\Commentaire $commentaire
-     *
-     * @return User
-     */
-    public function addCommentaire(\OC\PlatformBundle\Entity\Commentaire $commentaire)
-    {
-        $this->commentaires[] = $commentaire;
-
-        return $this;
-    }
-
-    /**
-     * Remove commentaire
-     *
-     * @param \OC\PlatformBundle\Entity\Commentaire $commentaire
-     */
-    public function removeCommentaire(\OC\PlatformBundle\Entity\Commentaire $commentaire)
-    {
-        $this->commentaires->removeElement($commentaire);
-    }
-
-    /**
-     * Get commentaires
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getCommentaires()
-    {
-        return $this->commentaires;
-    }
 }

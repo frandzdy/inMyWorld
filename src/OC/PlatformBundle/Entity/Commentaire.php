@@ -28,7 +28,6 @@ class Commentaire
      */
     private $commentaire;
 
-
     /**
      * Get id
      *
@@ -62,5 +61,5 @@ class Commentaire
     {
         return $this->commentaire;
     }
+    
 }
-
