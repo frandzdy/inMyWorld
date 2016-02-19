@@ -150,7 +150,7 @@ class Image
         if (null === $this->file)
             return;
 
-        $this->url = $this->id . '.' . $this->file->getClientOriginalName();
+        $this->url = $this->getId() . '.' . $this->file->getClientOriginalName();
         $this->alt = $this->file->getClientOriginalName();
     }
 
