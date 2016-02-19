@@ -29,13 +29,13 @@ class AdvertSkill
     private $level;
 
 	/**
-	 * @ORM\ManyToOne(targetEntity="OC\PlatformBundle\Entity\Advert", cascade={"persist"})
+	 * @ORM\ManyToOne(targetEntity="OC\PlatformBundle\Entity\Advert")
 	 * @ORM\JoinColumn(nullable=false)
 	 */
 	private $advert;
 	
 	/**
-	 * @ORM\ManyToOne(targetEntity="OC\PlatformBundle\Entity\Skill", cascade={"remove"})
+	 * @ORM\ManyToOne(targetEntity="OC\PlatformBundle\Entity\Skill")
 	 * @ORM\JoinColumn(nullable=false)
 	 */
 	 private $skill;

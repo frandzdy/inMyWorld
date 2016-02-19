@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * Commentaire
  *
  * @ORM\Table()
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="OC\PlatformBundle\Entity\commentaireRepository")
  */
 class Commentaire
 {
@@ -28,17 +28,6 @@ class Commentaire
      */
     private $commentaire;
 
-	/**
-   	* 
-   	* @ORM\OneToOne(targetEntity="OC\PlatformBundle\Entity\Application", inversedBy="user")
-   	*/
-   	private $user;
-	
-	/**
-   	* 
-   	* @ORM\OneToOne(targetEntity="OC\PlatformBundle\Entity\Advert", inversedBy="advert")
-   	*/
-   	private $advert;
     /**
      * Get id
      *
@@ -54,7 +43,7 @@ class Commentaire
      *
      * @param string $commentaire
      *
-     * @return Commentaire
+     * @return commentaire
      */
     public function setCommentaire($commentaire)
     {
@@ -72,52 +61,5 @@ class Commentaire
     {
         return $this->commentaire;
     }
-
-    /**
-     * Set user
-     *
-     * @param \OC\PlatformBundle\Entity\Application $user
-     *
-     * @return Commentaire
-     */
-    public function setUser(\OC\PlatformBundle\Entity\Application $user = null)
-    {
-        $this->user = $user;
-
-        return $this;
-    }
-
-    /**
-     * Get user
-     *
-     * @return \OC\PlatformBundle\Entity\Application
-     */
-    public function getUser()
-    {
-        return $this->user;
-    }
-
-    /**
-     * Set advert
-     *
-     * @param \OC\PlatformBundle\Entity\Advert $advert
-     *
-     * @return Commentaire
-     */
-    public function setAdvert(\OC\PlatformBundle\Entity\Advert $advert = null)
-    {
-        $this->advert = $advert;
-
-        return $this;
-    }
-
-    /**
-     * Get advert
-     *
-     * @return \OC\PlatformBundle\Entity\Advert
-     */
-    public function getAdvert()
-    {
-        return $this->advert;
-    }
+    
 }

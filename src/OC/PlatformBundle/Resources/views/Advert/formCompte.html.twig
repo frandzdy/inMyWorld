@@ -1,101 +1,115 @@
 {# src/OC/PlatformBundle/Resources/views/Advert/form.html.twig #}
 
+{# Déclaration de variable #}
+{%  set tailleChamp = 7  %}
+
+
 {% if user.id is not null %}
-	<h3>Modification d'un compte</h3>
+    <h3>Modification d'un compte</h3>
 {% else %}
-	<h3>Création d'un compte</h3>
+    <h3>Création d'un compte</h3>
 {% endif %}
+
 <div class="well">
-  {{ form_start(form, {'attr': {'class': 'form-horizontal'}}) }}
+    {{ form_start(form, {'attr': {'class': 'form-horizontal'}}) }}
 
     {# Les erreurs générales du formulaire. #}
     {{ form_errors(form) }}
-	<div class="row">
-		<div class="col-md-10">
-	    	<div class="form-group">
-	      		{# Génération du label. #}
-	      		{{ form_label(form.username, "Nom :", {'label_attr': {'class': 'col-sm-3 control-label'}}) }}
-	
-	      		{# Affichage des erreurs pour ce champ précis. #}
-	      		{{ form_errors(form.username) }}
-	
-		      	<div class="col-sm-4">
-		        	{# Génération de l'input. #}
-		        	{{ form_widget(form.username, {'attr': {'class': 'form-control'}}) }}
-		      	</div>
-	    	</div>
-			<div class="form-group">
-	      		{# Génération du label. #}
-	      		{{ form_label(form.prenom, "Prénom :", {'label_attr': {'class': 'col-sm-3 control-label'}}) }}
-	
-	      		{# Affichage des erreurs pour ce champ précis. #}
-	      		{{ form_errors(form.prenom) }}
-	
-		      	<div class="col-sm-4">
-		        	{# Génération de l'input. #}
-		        	{{ form_widget(form.prenom, {'attr': {'class': 'form-control'}}) }}
-		      	</div>
-	    	</div>
-	    	{# Idem pour un autre champ. #}
-	   	 	<div class="form-group">
-	      		{{ form_label(form.email, "E-mail :", {'label_attr': {'class': 'col-sm-3 control-label'}}) }}
-	      		{{ form_errors(form.email) }}
-	      		<div class="col-sm-4">
-	        		{{ form_widget(form.email, {'attr': {'class': 'form-control'}}) }}
-	      		</div>
-	      	</div>
-	      	{% if form.password is defined %}
-				<div class="form-group">
-			      {{ form_label(form.password, "Mot de passe :", {'label_attr': {'class': 'col-sm-3 control-label'}}) }}
-			      {{ form_errors(form.password) }}
-			      <div class="col-sm-4">
-			        {{ form_widget(form.password, {'attr': {'class': 'form-control'}}) }}
-			      </div>
-			    </div>
-			{% endif %}
-		    <div class="form-group">
-		      {{ form_label(form.roles, "Droit utilisateur :", {'label_attr': {'class': 'col-sm-3 control-label'}}) }}
-		      {{ form_errors(form.roles) }}
-		      <div class="col-sm-7">
-		        {{ form_widget(form.roles, {'attr': {'class': 'form-control'}}) }}
-		      </div>
-		    </div>
-		    <div class="form-group">
-		      {{ form_label(form.image, "Photo profile :", {'label_attr': {'class': 'col-sm-3 control-label'}}) }}
-		      {{ form_errors(form.image) }}
-		      <div class="col-sm-4">
-		        {{ form_widget(form.image, {'attr': {'class': 'form-control'}}) }}
-		      </div>
-		      <div class="col-sm-4">{{ form_row(form.image.file) }}</div>
-		    </div>
-		    
-		    <div class="form-group">
-		      {{ form_label(form.enabled, "Actif / Inactif :", {'label_attr': {'class': 'col-sm-3 control-label'}}) }}
-		      {{ form_errors(form.enabled) }}
-		      <div class="col-sm-4">
-		        {{ form_widget(form.enabled, {'attr': {'class': 'form-control'}}) }}
-		      </div>
-		    </div>
-		    {# Pour le bouton, pas de label ni d'erreur, on affiche juste le widget #}
-			{% if user.id is not null and is_granted('ROLE_ADMIN') %}
-			  	<a class="btn btn-danger btn-mini pull-right col-sm-2 " href="{{ path('oc_platform_deleteUser', {'id': user.id}) }}">Supprimer<a/>
-			{% endif %}
-			{{ form_widget(form.save, {'attr': {'class': 'btn btn-primary pull-right col-sm-2','style':'margin-right:5px;'}}) }}
-		</div>
-		<div class="col-md-2">
-			{% if user.image is not null %}
-				<img src="{{ asset(user.image.PathView) }}" alt="{{user.image.alt }}" style="width:100px" >
-			{% endif %}
-		</div>
-    </div>
-    
+    <div class="row">
+        <div class="col-md-10">
+            <div class="form-group">
+                {# Génération du label. #}
+                {{ form_label(form.username, "Nom :", {'label_attr': {'class': 'col-sm-3 control-label'}}) }}
 
-  
-  {# Génération automatique des champs pas encore écrits.
-     Dans cet exemple, ce serait le champ CSRF (géré automatiquement par Symfony !)
-     et tous les champs cachés (type « hidden »). #}
-  {{ form_rest(form) }}
-  
-  {# Fermeture de la balise <form> du formulaire HTML #}
-  {{ form_end(form) }}
+                {# Affichage des erreurs pour ce champ précis. #}
+                {{ form_errors(form.username) }}
+
+                <div class="col-sm-4">
+                    {# Génération de l'input. #}
+                    {{ form_widget(form.username, {'attr': {'class': 'form-control'}}) }}
+                </div>
+            </div>
+            {# Idem pour un autre champ. #}
+            <div class="form-group">
+                {{ form_label(form.email, "E-mail :", {'label_attr': {'class': 'col-sm-3 control-label'}}) }}
+                {{ form_errors(form.email) }}
+                <div class="col-sm-4">
+                    {{ form_widget(form.email, {'attr': {'class': 'form-control'}}) }}
+                </div>
+            </div>
+            {# Idem pour un autre champ. #}
+            <div class="form-group">
+                {{ form_label(form.emailCanonical, "Confirmez E-mail :", {'label_attr': {'class': 'col-sm-3 control-label'}}) }}
+                {{ form_errors(form.emailCanonical) }}
+                <div class="col-sm-4">
+                    {{ form_widget(form.emailCanonical, {'attr': {'class': 'form-control'}}) }}
+                </div>
+            </div>
+            {% if form.password is defined %}
+                <div class="form-group">
+                    {{ form_label(form.password, "Mot de passe :", {'label_attr': {'class': 'col-sm-3 control-label'}}) }}
+                    {{ form_errors(form.password) }}
+                    <div class="col-sm-4">
+                        {{ form_widget(form.password, {'attr': {'class': 'form-control'}}) }}
+                    </div>
+                </div>
+            {% endif %}
+            {% if form.plainPassword is defined %}
+                <div class="form-group">
+                    {{ form_label(form.plainPassword, "Confirmez Mot de passe :", {'label_attr': {'class': 'col-sm-3 control-label'}}) }}
+                    {{ form_errors(form.plainPassword) }}
+                    <div class="col-sm-4">
+                        {{ form_widget(form.plainPassword, {'attr': {'class': 'form-control'}}) }}
+                    </div>
+                </div>
+            {% endif %}
+            <div class="form-group">
+                {{ form_label(form.roles, "Droit utilisateur :", {'label_attr': {'class': 'col-sm-3 control-label'}}) }}
+                {{ form_errors(form.roles) }}
+                <div class="col-sm-7">
+                    {{ form_widget(form.roles, {'attr': {'class': 'form-control'}}) }}
+                </div>
+            </div>
+            <div class="form-group">
+                {{ form_label(form.image.file, "Photo profile :", {'label_attr': {'class': 'col-sm-3 control-label'}}) }}
+                {{ form_errors(form.image.file) }}
+                <div class="col-sm-4">
+                    {{ form_widget(form.image.file, {'attr': {'class': 'form-control'}}) }}
+                </div>
+                {% if user.id is not null %}
+                    <div class="col-sm-5 pull-right">
+                        <a class=""
+                           href="{{ asset(user.image.pathView) }}">{{ user.image.alt }}<a/>
+                    </div>
+                {% endif %}
+            </div>
+            <div class="form-group">
+                {{ form_label(form.enabled, "Actif / Inactif :", {'label_attr': {'class': 'col-sm-3 control-label'}}) }}
+                {{ form_errors(form.enabled) }}
+                <div class="col-sm-4">
+                    {{ form_widget(form.enabled, {'attr': {'class': 'form-control'}}) }}
+                </div>
+            </div>
+            {# Pour le bouton, pas de label ni d'erreur, on affiche juste le widget #}
+            {% if user.id is not null and is_granted('ROLE_ADMIN') %}
+            <a class="btn btn-danger btn-mini pull-right col-sm-2 "
+               href="{{ path('oc_platform_deleteUser', {'id': user.id}) }}">Supprimer<a/>
+                {% endif %}
+                {{ form_widget(form.save, {'attr': {'class': 'btn btn-primary pull-right col-sm-2','style':'margin-right:5px;'}}) }}
+        </div>
+        <div class="col-md-2">
+            {% if user.image is not null %}
+                <img src="{{ asset(user.image.PathView) }}" alt="{{ user.image.alt }}" style="width:100px">
+            {% endif %}
+        </div>
+    </div>
+
+
+    {# Génération automatique des champs pas encore écrits.
+       Dans cet exemple, ce serait le champ CSRF (géré automatiquement par Symfony !)
+       et tous les champs cachés (type « hidden »). #}
+    {{ form_rest(form) }}
+
+    {# Fermeture de la balise <form> du formulaire HTML #}
+    {{ form_end(form) }}
 </div>

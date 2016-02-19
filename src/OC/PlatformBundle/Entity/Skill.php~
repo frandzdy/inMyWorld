@@ -63,4 +63,3 @@ class Skill
         return $this->name;
     }
 }
-
