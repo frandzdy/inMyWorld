@@ -112,7 +112,7 @@ class Advert
     private $nbApplications = 0;
     /**
      *
-     * @ORM\ManyToMany(targetEntity="OC\PlatformBundle\Entity\Commentaire", mappedBy="advert")
+     * @ORM\ManyToMany(targetEntity="OC\PlatformBundle\Entity\Commentaire", cascade={"persist","remove"})
      */
     private $commentaires;
 
