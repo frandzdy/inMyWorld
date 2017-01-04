@@ -13,8 +13,8 @@ before_install:
   - mysql -u root -e "create database IF NOT EXISTS symfony;" -uroot
 
 install:
-    - composer update
-    # - php app/console doctrine:fixtures:load --no-interaction
+    - composer install --no-interaction
+    - php app/console doctrine:fixtures:load --no-interaction
     - bin/phpunit src/
 
 notifications:
