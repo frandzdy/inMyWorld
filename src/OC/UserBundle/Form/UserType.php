@@ -3,6 +3,11 @@
 namespace OC\UserBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Symfony\Component\Form\Extension\Core\Type\EmailType;
+use Symfony\Component\Form\Extension\Core\Type\PasswordType;
+use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\FormEvent;
@@ -19,12 +24,41 @@ class UserType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+//        $builder
+//            ->add('username', TextType::class)
+//            ->add('email', EmailType::class)
+//            ->add('emailCanonical', EmailType::class)
+//            ->add('image', new ImageType())
+//            ->add('enabled', 'checkbox', array('required' => false))
+//            ->add('roles', 'choice', array(
+//                'choices' => array(
+//                    "ROLE_ADMIN" => ' ADMIN',
+//                    "ROLE_AUTEUR" => ' AUTEUR',
+//                    "ROLE_MODERATEUR" => ' MODERATEUR'
+//                ), 'required' => false, "multiple" => true, "expanded" => true
+//            ));
+
         $builder
-            ->add('username', 'text')
-            ->add('email', 'email')
-            ->add('emailCanonical', 'email')
-            ->add('image', new ImageType())
-            ->add('enabled', 'checkbox', array('required' => false))
+            ->add('username', TextType::class)
+            ->add('password', RepeatedType::class, array(
+                'type' => PasswordType::class,
+                'invalid_message' => 'The password fields must match.',
+                'options' => array('attr' => array('class' => 'password-field')),
+                'required' => true,
+//                'first_options'  => array('label' => 'Password'),
+//                'second_options' => array('label' => 'Repeat Password'),
+            ))
+            ->add('email', RepeatedType::class, array(
+                'type' => EmailType::class,
+                'invalid_message' => 'The password fields must match.',
+                'options' => array('attr' => array('class' => 'password-field')),
+                'required' => true,
+//                'first_options'  => array('label' => 'Password'),
+//                'second_options' => array('label' => 'Repeat Password'),
+            ))
+//            ->add('emailCanonical', EmailType::class)
+            ->add('image', ImageType::class)
+            ->add('enabled', CheckboxType::class, array('required' => false))
             ->add('roles', 'choice', array(
                 'choices' => array(
                     "ROLE_ADMIN" => ' ADMIN',

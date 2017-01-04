@@ -1,0 +1,14 @@
+{{ form_start(form, {'attr': {'class': 'form-horizontal'}}) }}
+<div class="form-group">
+    {{ form_label(form.commentaire, "Commentaire :", {'label_attr': {'class': 'col-sm-3 control-label'}}) }}
+    {{ form_errors(form.commentaire) }}
+    <div class="col-sm-9">
+        {{ form_widget(form.commentaire, {'attr': {'class': 'form-control'}}) }}
+    </div>
+</div>
+{{ form_widget(form.save, {'attr': {'class': 'btn btn-primary pull-right col-sm-2','style':'margin-right:5px;'}}) }}
+    {# 	Génération automatique des champs pas encore écrits.
+        Dans cet exemple, ce serait le champ CSRF (géré automatiquement par Symfony !)
+        et tous les champs cachés (type « hidden »). #}
+{{ form_rest(form) }}
+{{ form_end(form) }}

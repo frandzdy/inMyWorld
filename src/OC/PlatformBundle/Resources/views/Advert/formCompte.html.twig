@@ -31,18 +31,17 @@
             </div>
             {# Idem pour un autre champ. #}
             <div class="form-group">
-                {{ form_label(form.email, "E-mail :", {'label_attr': {'class': 'col-sm-3 control-label'}}) }}
-                {{ form_errors(form.email) }}
+                {{ form_label(form.email.first, "E-mail :", {'label_attr': {'class': 'col-sm-3 control-label'}}) }}
+                {{ form_errors(form.email.first) }}
                 <div class="col-sm-4">
-                    {{ form_widget(form.email, {'attr': {'class': 'form-control'}}) }}
+                    {{ form_widget(form.email.first, {'attr': {'class': 'form-control'}}) }}
                 </div>
             </div>
-            {# Idem pour un autre champ. #}
             <div class="form-group">
-                {{ form_label(form.emailCanonical, "Confirmez E-mail :", {'label_attr': {'class': 'col-sm-3 control-label'}}) }}
-                {{ form_errors(form.emailCanonical) }}
+                {{ form_label(form.email.second, "Confirmez votre e-mail :", {'label_attr': {'class': 'col-sm-3 control-label'}}) }}
+                {{ form_errors(form.email.second) }}
                 <div class="col-sm-4">
-                    {{ form_widget(form.emailCanonical, {'attr': {'class': 'form-control'}}) }}
+                    {{ form_widget(form.email.second, {'attr': {'class': 'form-control'}}) }}
                 </div>
             </div>
             {% if form.password is defined %}

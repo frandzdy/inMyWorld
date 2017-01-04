@@ -13,24 +13,16 @@ class AdvertRepository extends \Doctrine\ORM\EntityRepository
     public function getAdvertWithCategories($id)
     {
         $qb = $this->createQueryBuilder('a')
-            ->leftjoin('a.applications', 'app')
-            ->addSelect('app')
-            ->leftjoin('a.categories', 'cat')
-            ->addSelect('cat')
-            // -> leftjoin('a.commentaire','commt')
-            // -> addSelect('commt')
             ->where("a.id = :id");
         $qb->setParameter("id", $id);
+
         return $qb->getQuery()->getSingleResult();
     }
 
     public function getSearch($search)
     {
-        $qb = $this->createQueryBuilder('a')
-            ->leftjoin('a.applications', 'app')
-            ->addSelect('app')
-            ->leftjoin('a.categories', 'cat')
-            ->addSelect('cat');
+        $qb = $this->createQueryBuilder('a');
+
         $qb->where($qb->expr()->like("a.title", ':s'));
         $qb->setParameter("s", "%" . $search . "%");
         return $qb->getQuery()->getResult();

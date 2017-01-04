@@ -3,6 +3,7 @@
 namespace OC\PlatformBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -15,7 +16,7 @@ class ImageType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-			->add('file','file',array("required"=>false))
+			->add('file', FileType::class, array("required"=> false))
         ;
     }
     
@@ -32,7 +33,7 @@ class ImageType extends AbstractType
     /**
      * @return string
      */
-    public function getName()
+    public function getBlockPrefix()
     {
         return 'oc_platformbundle_image';
     }

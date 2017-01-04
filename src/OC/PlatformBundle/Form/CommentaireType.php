@@ -3,6 +3,8 @@
 namespace OC\PlatformBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
@@ -15,10 +17,10 @@ class CommentaireType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('commentaire','textarea', array('attr' => array("style" => "width:100%")))
+            ->add('commentaire', TextareaType::class, array('attr' => array("style" => "width:100%")))
             // ->add('user')
             // ->add('advert')
-            ->add('save','submit', array("label" => "Publié"))
+            ->add('save', SubmitType::class, array("label" => "Publié"))
         ;
     }
     
@@ -35,7 +37,7 @@ class CommentaireType extends AbstractType
     /**
      * @return string
      */
-    public function getName()
+    public function getBlockPrefix()
     {
         return 'oc_platformbundle_commentaire';
     }

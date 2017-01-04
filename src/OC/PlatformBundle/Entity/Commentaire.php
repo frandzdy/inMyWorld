@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * Commentaire
  *
  * @ORM\Table()
- * @ORM\Entity(repositoryClass="OC\PlatformBundle\Entity\commentaireRepository")
+ * @ORM\Entity(repositoryClass="OC\PlatformBundle\Entity\CommentaireRepository")
  */
 class Commentaire
 {
@@ -24,10 +24,16 @@ class Commentaire
     /**
      * @var string
      *
-     * @ORM\Column(name="commentaire", type="string", length=500)
+     * @ORM\Column(name="contenu", type="string", length=500)
      */
-    private $commentaire;
+    private $contenu;
 
+    /**
+     * @var
+     * @ORM\ManyToOne(targetEntity="OC\PlatformBundle\Entity\Advert", cascade={"persist","remove"}, inversedBy="commentaire")
+     */
+
+    private $advert;
     /**
      * Get id
      *
@@ -45,9 +51,9 @@ class Commentaire
      *
      * @return commentaire
      */
-    public function setCommentaire($commentaire)
+    public function setCommentaire($contenu)
     {
-        $this->commentaire = $commentaire;
+        $this->contenu = $contenu;
 
         return $this;
     }
@@ -59,7 +65,46 @@ class Commentaire
      */
     public function getCommentaire()
     {
-        return $this->commentaire;
+        return $this->contenu;
     }
-    
+
+    /**
+     * @return mixed
+     */
+    public function getAdvert()
+    {
+        return $this->advert;
+    }
+
+    /**
+     * @param mixed $post
+     */
+    public function setAdvert($advert)
+    {
+        $this->advert = $advert;
+    }
+
+    /**
+     * Set contenu
+     *
+     * @param string $contenu
+     *
+     * @return Commentaire
+     */
+    public function setContenu($contenu)
+    {
+        $this->contenu = $contenu;
+
+        return $this;
+    }
+
+    /**
+     * Get contenu
+     *
+     * @return string
+     */
+    public function getContenu()
+    {
+        return $this->contenu;
+    }
 }

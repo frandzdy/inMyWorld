@@ -22,8 +22,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\HttpFoundation\ResponseHeaderBag;
 
-
-class AdvertController extends Controller
+class HobbitsController extends Controller
 {
     public function indexAction()
     {
@@ -120,6 +119,13 @@ class AdvertController extends Controller
         if ($form->isValid()) {
             $advert = $form->getData();
             $em = $this->getDoctrine()->getManager();
+            foreach ($advert->getName() as $name) {
+                $advertSkill = new AdvertSkill();
+                $advertSkill->setAdvert($advert);
+                $advertSkill->setSkill($name);
+
+                $em->persist($advertSkill);
+            }
             // comme c'est le manager qui récupère l'annonce on n'a pas besoin de faire de persist sur l'objet $advert
             // on enregistre
             $em->flush();
@@ -143,7 +149,6 @@ class AdvertController extends Controller
 
         // On crée le FormBuilder grâce au service form factory
         $form = $this->get('form.factory')->create(AdvertType::class, $advert);
-        $user = $this->getUser();
 
         // on vérifie que le submit est valide
         $form->handleRequest($request);
@@ -151,7 +156,20 @@ class AdvertController extends Controller
         if ($form->isValid()) {
             $advert = $form->getData();
             $em = $this->getDoctrine()->getManager();
-            $advert->setAuthor($user);
+            foreach ($advert->getName() as $name) {
+                $advertSkill = new AdvertSkill();
+                // print $name;
+                // die;
+                $advertSkill->setAdvert($advert);
+                $advertSkill->setSkill($name);
+
+                $em->persist($advertSkill);
+            }
+            // on enregistre l'image
+            // $advert->getImage()->upload();
+            // on appel notre manager pour enregistrer car new Advert
+
+            // on persist l'annonce
             $em->persist($advert);
             // on enregistre
             $em->flush();
@@ -175,13 +193,17 @@ class AdvertController extends Controller
         // on récupère notre entité selon l'id reçu
         $advert = $em->getRepository("OCPlatformBundle:Advert")->find($id);
         // on récupère les compétences liées à notre annonce
-
+        $listAdvertSkills = $em
+            ->getRepository('OCPlatformBundle:AdvertSkill')
+            ->findBy(array('advert' => $advert));
         $form = $this->createFormBuilder()->getForm();
         // On crée un formulaire vide, qui ne contiendra que le champ CSRF
         // Cela permet de protéger la suppression d'annonce contre cette faille
         if ($form->handleRequest($request)->isValid()) {
             // pour chaque instance on supprime les compétences de l'annonce
-
+            foreach ($listAdvertSkills as $skill) {
+                $em->remove($skill);
+            }
             // on supprime l'annonce et l'image car etant liées à l'annnonce
             $em->remove($advert);
             $em->flush();

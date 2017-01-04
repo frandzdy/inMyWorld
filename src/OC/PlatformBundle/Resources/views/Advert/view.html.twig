@@ -15,8 +15,8 @@
 	  	<img src="{{ asset(advert.image.PathView) }}" alt="{{ advert.image.alt }}">
 	{% endif %}
 	
-  	<h2>{{ advert.title }}</h2>
-  	<i>Par {{ advert.author }}, le {{ advert.date|date('d/m/Y') }}</i>
+  	{#<h2>{{ advert.title }}</h2>#}
+  	<i>Par {{ advert.author }}, le {{ advert.createdAt|date('d/m/Y') }}</i>
 
   	<div class="well">
   		<div class="row">
@@ -31,59 +31,23 @@
     	</div>
     	<div class="row">
     		<div class="col-sm-6 col-md-6">
-		  		 {{ form_start(form, {'attr': {'class': 'form-horizontal'}}) }}
-			  		<div class="form-group">
-			      		{{ form_label(form.commentaire, "Commentaire :", {'label_attr': {'class': 'col-sm-3 control-label'}}) }}
-				      	{{ form_errors(form.commentaire) }}
-				      	<div class="col-sm-9">
-				        	{{ form_widget(form.commentaire, {'attr': {'class': 'form-control'}}) }}
-				      	</div>
-				    </div>
-				    {{ form_widget(form.save, {'attr': {'class': 'btn btn-primary pull-right col-sm-2','style':'margin-right:5px;'}}) }}
-			  		{# 	Génération automatique des champs pas encore écrits.
-				     	Dans cet exemple, ce serait le champ CSRF (géré automatiquement par Symfony !)
-				     	et tous les champs cachés (type « hidden »). #}
-				  	{{ form_rest(form) }}
-			  	{{ form_end(form) }}
+		  		 {{ include("OCPlatformBundle:Advert:formCommentaire.html.twig") }}
 		  	</div>
     	</div>
   	</div>
   	
   	<div class="well">
-  		<h4>Spécification(s) de l'annonce :</h4>
+  		<h4>Commentaires :</h4>
 	  	<div class="well">
-			<h4>Catégorie(s) :</h4>
-		  	{% if advert.categories  is not null%}
-	    		Cette annonce concerne les catégorie(s) suivante(s) :
-				<ul>
-		      		{% for advCat in advert.categories %}
-		        		<li>{{ advCat.name }}</li>
-		      		{% endfor %}
-		   	 	</ul>
-			{% endif %}
+		  	{#{% if advert.commentaires  is not null%}#}
+	    		{#Cette annonce concerne les catégorie(s) suivante(s) :#}
+				{#<ul>#}
+		      		{#{% for advCom in advert.commentaires %}#}
+		        		{#<li>{{ advCom.name }}</li>#}
+		      		{#{% endfor %}#}
+		   	 	{#</ul>#}
+			{#{% endif %}#}
 		</div>
-		<div class="well">
-			<h4>Compétence(s) :</h4>
-		  	{% if listAdvertSkills|length > 0 %}
-				Cette annonce requiert les compétence(s) suivante(s) :
-				<ul>
-		      		{% for advertSkill in listAdvertSkills %}
-		        		<li>{{ advertSkill.skill.name }} : niveau {{ advertSkill.level }}</li>
-		      		{% endfor %}
-		   	 	</ul>
-			{% endif %}
-		</div>
-		<div class="well">
-			<h4>Candidature(s) :</h4>
-	    	{% if advert.applications is not null %}
-	    		{% for app in advert.applications %}
-	    			<div class="well">
-				    	{{ app.content }}
-				    	<i>Par {{ app.author }}, le {{ app.date|date('d/m/Y') }}</i>
-				  	</div>
-	    		{% endfor %}
-	    	{% endif %}
-	  	</div>
   	</div>
   	<p>
     	<a href="{{ path('oc_platform_home') }}" class="btn btn-default">

@@ -71,4 +71,7 @@ oc_chat_main:
 oc_chat_ajax:
     path:     /ajax/
     defaults: { _controller: OCChatBundle:Chat:ajax }
-   
+
+oc_hobbies_home:
+    path: /hobbies/
+    defaults: { _controller: OCPlatformBundle:Hobbits:index }
