@@ -58,7 +58,7 @@ class Advert
     /**
      * @var entity
      *
-     * @ORM\OneToMany(targetEntity="OC\PlatformBundle\Entity\Commentaire", cascade={"persist","remove"}, mappedBy="post")
+     * @ORM\ManyToOne(targetEntity="OC\PlatformBundle\Entity\Commentaire", cascade={"persist","remove"})
      */
     private $commentaires;
 

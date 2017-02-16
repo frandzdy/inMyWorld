@@ -41,7 +41,7 @@ class UserType extends AbstractType
         $builder
             ->add('username', TextType::class)
             ->add('password', RepeatedType::class, array(
-                'type' => PasswordType::class,
+                'type' => EmailType::class,
                 'invalid_message' => 'The password fields must match.',
                 'options' => array('attr' => array('class' => 'password-field')),
                 'required' => true,
@@ -77,12 +77,29 @@ class UserType extends AbstractType
                 }
                 // si on n'a pas de password et pas d'id user alors on est en création
                 if (!$user->getPassword() || null === $user->getId()) {
-                    $event->getForm()->add('password', 'password', array('required' => true));
-                    $event->getForm()->add('plainPassword', 'password', array('required' => true));
+//                    $event->getForm()->add('password', 'password', array('required' => true));
+//                    $event->getForm()->add('plainPassword', 'password', array('required' => true));
+
+                    $event->getForm()->add('password', RepeatedType::class, array(
+                        'type' => PasswordType::class,
+                        'invalid_message' => 'The password fields must match.',
+                        'options' => array('attr' => array('class' => 'password-field')),
+                        'required' => true,
+//                'first_options'  => array('label' => 'Password'),
+//                'second_options' => array('label' => 'Repeat Password'),
+                    ));
                     $event->getForm()->add('save', 'submit', array('label' => 'Sauvegarder'));
                 } else {
-                    $event->getForm()->add('password', 'password', array('required' => FALSE));
-                    $event->getForm()->add('plainPassword', 'password', array('required' => FALSE));
+//                    $event->getForm()->add('password', 'password', array('required' => FALSE));
+//                    $event->getForm()->add('plainPassword', 'password', array('required' => FALSE));
+                    $event->getForm()->add('password', RepeatedType::class, array(
+                        'type' => PasswordType::class,
+                        'invalid_message' => 'The password fields must match.',
+                        'options' => array('attr' => array('class' => 'password-field')),
+                        'required' => false,
+//                'first_options'  => array('label' => 'Password'),
+//                'second_options' => array('label' => 'Repeat Password'),
+                    ));
                     $event->getForm()->add('save', 'submit', array('label' => 'Modifier'));
                 }
 

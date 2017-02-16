@@ -22,7 +22,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\HttpFoundation\ResponseHeaderBag;
 
-class HobbitsController extends Controller
+class PreferenceController extends Controller
 {
     public function indexAction()
     {
