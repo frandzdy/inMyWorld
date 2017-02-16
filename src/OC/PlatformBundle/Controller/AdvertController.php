@@ -27,10 +27,11 @@ class AdvertController extends Controller
 {
     public function indexAction()
     {
+        $advertAll = array();
         // ...
         $em = $this->getDoctrine()->getManager();
         // on récupère notre entité selon l'id reçu
-        $advertAll = $em->getRepository("OCPlatformBundle:Advert")->findAll();
+//        $advertAll = $em->getRepository("OCPlatformBundle:Advert")->findAll();
         // Et modifiez le 2nd argument pour injecter notre liste
         return $this->render('OCPlatformBundle:Advert:index.html.twig', array(
             'listAdverts' => $advertAll
@@ -219,7 +220,7 @@ class AdvertController extends Controller
             // $user->getImage()->upload();
             // on appel notre manager pour enregistrer car new Advert
             $em = $this->getDoctrine()->getManager();
-            // on persist l'annonce
+            // on persist le user
             $em->persist($user);
             // on enregistre
             $em->flush();
@@ -251,12 +252,12 @@ class AdvertController extends Controller
         $form->handleRequest($request);
         // on vérifie que le formulaire est valide
         if ($form->isValid()) {
-            $newPassword = $form->get('password')->getData();
-            $oldPassword = $form->get('plainPassword')->getData();
-            // on enregistre
-            if (!empty($newPassword) && strcmp($oldPassword, $newPassword) === 0) {
+//            $newPassword = $form->get('password')->getData();
+//            $oldPassword = $form->get('plainPassword')->getData();
+//            // on enregistre
+            if (!empty($form->get('password')->getData())) {
                 // set plain permet de crypter le nouveau mot de passe
-                $user->setPlainPassword($newPassword);
+                $user->setPlainPassword($form->get('password')->getData());
             } else {
                 // setPassword va concerver le mot de passe crypter déjà existant
                 $user->setPassword($password);

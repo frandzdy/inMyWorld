@@ -27,13 +27,13 @@ class Commentaire
      * @ORM\Column(name="contenu", type="string", length=500)
      */
     private $contenu;
-
-    /**
-     * @var
-     * @ORM\ManyToOne(targetEntity="OC\PlatformBundle\Entity\Advert", cascade={"persist","remove"}, inversedBy="commentaire")
-     */
-
-    private $advert;
+//
+//    /**
+//     * @var
+//     * @ORM\ManyToOne(targetEntity="OC\PlatformBundle\Entity\Advert", cascade={"persist","remove"}, inversedBy="commentaire")
+//     */
+//
+//    private $advert;
     /**
      * Get id
      *
@@ -68,21 +68,21 @@ class Commentaire
         return $this->contenu;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getAdvert()
-    {
-        return $this->advert;
-    }
-
-    /**
-     * @param mixed $post
-     */
-    public function setAdvert($advert)
-    {
-        $this->advert = $advert;
-    }
+//    /**
+//     * @return mixed
+//     */
+//    public function getAdvert()
+//    {
+//        return $this->advert;
+//    }
+//
+//    /**
+//     * @param mixed $post
+//     */
+//    public function setAdvert($advert)
+//    {
+//        $this->advert = $advert;
+//    }
 
     /**
      * Set contenu
