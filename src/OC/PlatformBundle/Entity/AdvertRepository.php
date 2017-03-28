@@ -10,6 +10,10 @@ namespace OC\PlatformBundle\Entity;
  */
 class AdvertRepository extends \Doctrine\ORM\EntityRepository
 {
+    /**
+     * @param $id
+     * @return mixed
+     */
     public function getAdvertWithCategories($id)
     {
         $qb = $this->createQueryBuilder('a')
@@ -19,12 +23,31 @@ class AdvertRepository extends \Doctrine\ORM\EntityRepository
         return $qb->getQuery()->getSingleResult();
     }
 
+    /**
+     * @param $search
+     * @return array
+     */
     public function getSearch($search)
     {
         $qb = $this->createQueryBuilder('a');
 
         $qb->where($qb->expr()->like("a.title", ':s'));
         $qb->setParameter("s", "%" . $search . "%");
+        return $qb->getQuery()->getResult();
+    }
+
+    /**
+     * @param $id
+     * @return mixed
+     */
+    public function  findPostUser($id)
+    {
+        $qb = $this->createQueryBuilder('a')
+            ->leftJoin('a.image', 'i')
+            ->addSelect('i')
+            ->where("a.author = :id");
+        $qb->setParameter("id", $id);
+
         return $qb->getQuery()->getResult();
     }
 

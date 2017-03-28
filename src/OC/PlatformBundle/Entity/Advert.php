@@ -36,7 +36,7 @@ class Advert
     /**
      * @var string
      *
-     * @ORM\OneToOne(targetEntity="\OC\UserBundle\Entity\User")
+     * @ORM\ManyToOne(targetEntity="\OC\UserBundle\Entity\User")
      */
     private $author;
 
@@ -58,7 +58,7 @@ class Advert
     /**
      * @var entity
      *
-     * @ORM\OneToMany(targetEntity="OC\PlatformBundle\Entity\Commentaire", cascade={"persist","remove"}, mappedBy="post")
+     * @ORM\ManyToMany(targetEntity="OC\PlatformBundle\Entity\Commentaire", cascade={"persist","remove"})
      */
     private $commentaires;
 
@@ -184,8 +184,8 @@ class Advert
     }
 
     /**
- * @ORM\PreUpdate
- */
+     * @ORM\PreUpdate
+     */
     public function updateDate()
     {
         $this->setUpdatedAt(new \DateTime());
@@ -264,5 +264,19 @@ class Advert
     public function getCommentaires()
     {
         return $this->commentaires;
+    }
+
+    /**
+     * Set commentaires
+     *
+     * @param \OC\PlatformBundle\Entity\Commentaire $commentaires
+     *
+     * @return Advert
+     */
+    public function setCommentaires(\OC\PlatformBundle\Entity\Commentaire $commentaires = null)
+    {
+        $this->commentaires = $commentaires;
+
+        return $this;
     }
 }

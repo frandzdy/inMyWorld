@@ -3,6 +3,7 @@
 namespace OC\PlatformBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use OC\PlatformBundle\Entity\SuperMappedClass\ref_date;
 
 /**
  * Commentaire
@@ -10,7 +11,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table()
  * @ORM\Entity(repositoryClass="OC\PlatformBundle\Entity\CommentaireRepository")
  */
-class Commentaire
+class Commentaire extends ref_date
 {
     /**
      * @var integer
@@ -29,12 +30,6 @@ class Commentaire
     private $contenu;
 
     /**
-     * @var
-     * @ORM\ManyToOne(targetEntity="OC\PlatformBundle\Entity\Advert", cascade={"persist","remove"}, inversedBy="commentaire")
-     */
-
-    private $advert;
-    /**
      * Get id
      *
      * @return integer
@@ -42,30 +37,6 @@ class Commentaire
     public function getId()
     {
         return $this->id;
-    }
-
-    /**
-     * Set commentaire
-     *
-     * @param string $commentaire
-     *
-     * @return commentaire
-     */
-    public function setCommentaire($contenu)
-    {
-        $this->contenu = $contenu;
-
-        return $this;
-    }
-
-    /**
-     * Get commentaire
-     *
-     * @return string
-     */
-    public function getCommentaire()
-    {
-        return $this->contenu;
     }
 
     /**

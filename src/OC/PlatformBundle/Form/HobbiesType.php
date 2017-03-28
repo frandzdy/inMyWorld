@@ -2,6 +2,7 @@
 
 namespace OC\PlatformBundle\Form;
 
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
@@ -14,8 +15,9 @@ use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Validator\Constraints\Type;
+use OC\PlatformBundle\Entity;
 
-class AdvertType extends AbstractType
+class HobbiesType extends AbstractType
 {
     /**
      * @param FormBuilderInterface $builder
@@ -27,25 +29,28 @@ class AdvertType extends AbstractType
 //            ->add('date', DateType::class)
 //            ->add('title', TextType::class)
 //            ->add('author', TextType::class)
-            ->add('content', TextareaType::class)
+//            ->add('content', TextareaType::class)
 //            ->add('published', CheckboxType::class, array('required' => false))
-            ->add('image', ImageType::class)
+//            ->add('image', ImageType::class)
             /*
               * Rappel :
               ** - 1er argument : nom du champ, ici « categories », car c'est le nom de l'attribut
               ** - 2e argument : type du champ, ici « collection » qui est une liste de quelque chose
               ** - 3e argument : tableau d'options du champ
               */
-//            ->add('categories', CollectionType::class, array(
-//                    'entry_type' => CategoryType::class,
-//                    'allow_add' => true,
-//                    'allow_delete' => true,
-//                    'entry_options' => array(
-//                        'required' => false,
-//                        'attr' => array('class' => 'email-box')
-//                        )
-//                    )
-//                )
+            ->add('preference', EntityType::class, array(
+                    'label' => 'lg_raison_sociale_',
+                    'class' => 'OC\PlatformBundle\Entity\RefHobbies',
+//                    'query_builder' => function($repository) use ($userId, $commercialId) {
+//                        return $repository->findTiersFactureQuery($userId, $commercialId);
+//                    },
+                    'property' => 'preference',
+                    'empty_value' => 'lg_choisissez',
+//                    'cascade_validation' => false,
+                'expanded' => true,
+                'multiple' => true,
+                )
+            )
             ->add('save', SubmitType::class);
 
         $builder->addEventListener(
@@ -65,20 +70,10 @@ class AdvertType extends AbstractType
     }
 
     /**
-     * @param OptionsResolverInterface $resolver
-     */
-    public function configureOptions(OptionsResolver $resolver)
-    {
-        $resolver->setDefaults(array(
-            'data_class' => 'OC\PlatformBundle\Entity\Advert'
-        ));
-    }
-
-    /**
      * @return string
      */
     public function getBlockPrefix()
     {
-        return 'oc_platformbundle_advert';
+        return 'oc_platformbundle_userpreferences';
     }
 }

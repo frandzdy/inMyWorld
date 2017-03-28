@@ -7,15 +7,19 @@ use OC\PlatformBundle\Entity\Advert;
 use OC\PlatformBundle\Entity\Image;
 use OC\PlatformBundle\Entity\Commentaire;
 
+use OC\PlatformBundle\Entity\UserPreferences;
+use OC\PlatformBundle\Form\HobbiesType;
 use OC\UserBundle\Entity\User;
 
 use OC\PlatformBundle\Form\AdvertType;
 use OC\PlatformBundle\Form\AdvertEditType;
 use OC\PlatformBundle\Form\CommentaireType;
 
+use OC\UserBundle\Entity\UserRefHobbies;
 use OC\UserBundle\Form\UserType;
 use OC\UserBundle\Form\UserEditType;
 
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -24,15 +28,40 @@ use Symfony\Component\HttpFoundation\ResponseHeaderBag;
 
 class HobbitsController extends Controller
 {
-    public function indexAction()
+    /**
+     * @return Response
+     */
+    public function indexAction(Request $request)
     {
+        $userActuel = $this->getUser();
         // ...
         $em = $this->getDoctrine()->getManager();
-        // on récupère notre entité selon l'id reçu
-        $advertAll = $em->getRepository("OCPlatformBundle:Advert")->findAll();
+
+        $userActuelPreferences = $userActuel->getPreferences();
+echo "Frandzdy Debug";
+echo "<pre>";
+\Doctrine\Common\Util\Debug::Dump($userActuelPreferences);
+echo "</pre>";
+die('methode : '.__METHOD__.' ligne : '.__LINE__);
+
+        $form = $this->createForm(new HobbiesType(), $userActuelPreferences);
         // Et modifiez le 2nd argument pour injecter notre liste
-        return $this->render('OCPlatformBundle:Advert:index.html.twig', array(
-            'listAdverts' => $advertAll
+        $form->handleRequest($request);
+        if ($form->isValid() && $form->isSubmitted()) {
+            $preferences = $form['preferences']->getData();
+
+            foreach ($preferences as $preference) {
+                $userActuel->addPreference($preference);
+                $em->persist($userActuel);
+            }
+
+            $em->flush();
+
+            return new RedirectResponse($this->generateUrl('oc_hobbies_home'));
+        }
+
+        return $this->render('OCPlatformBundle:Hobbies:index.html.twig', array(
+            'form' => $form->createView()
         ));
 
     }

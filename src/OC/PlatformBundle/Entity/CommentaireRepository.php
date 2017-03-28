@@ -10,4 +10,19 @@ namespace OC\PlatformBundle\Entity;
  */
 class CommentaireRepository extends \Doctrine\ORM\EntityRepository
 {
+    /**
+     * fonction qui retourne la liste des commentaires d'un post
+     * @param $array
+     * @return array
+     */
+    public function getCommentaireForAdvert($array)
+    {
+        $qb = $this->createQueryBuilder('c');
+
+        $qb->select('c')
+            ->where('c.advert = :id')
+            ->setParameter('id', $array['id']);
+
+        return $qb->getQuery()->getResult();
+    }
 }
