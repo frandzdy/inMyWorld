@@ -38,4 +38,8 @@ class LoadDepartement implements FixtureInterface
         // On déclenche l'enregistrement de toutes les catégories
         $manager->flush();
     }
+
+    public function getOrder() {
+        return 2;
+    }
 }

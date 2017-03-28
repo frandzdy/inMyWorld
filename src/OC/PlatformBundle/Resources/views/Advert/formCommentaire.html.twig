@@ -1,9 +1,9 @@
 {{ form_start(form, {'attr': {'class': 'form-horizontal'}}) }}
 <div class="form-group">
-    {{ form_label(form.commentaire, "Commentaire :", {'label_attr': {'class': 'col-sm-3 control-label'}}) }}
-    {{ form_errors(form.commentaire) }}
+    {{ form_label(form.contenu, "Commentaire :", {'label_attr': {'class': 'col-sm-3 control-label'}}) }}
+    {{ form_errors(form.contenu) }}
     <div class="col-sm-9">
-        {{ form_widget(form.commentaire, {'attr': {'class': 'form-control'}}) }}
+        {{ form_widget(form.contenu, {'attr': {'class': 'form-control'}}) }}
     </div>
 </div>
 {{ form_widget(form.save, {'attr': {'class': 'btn btn-primary pull-right col-sm-2','style':'margin-right:5px;'}}) }}

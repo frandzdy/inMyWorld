@@ -39,14 +39,13 @@
   	<div class="well">
   		<h4>Commentaires :</h4>
 	  	<div class="well">
-		  	{#{% if advert.commentaires  is not null%}#}
-	    		{#Cette annonce concerne les catégorie(s) suivante(s) :#}
-				{#<ul>#}
-		      		{#{% for advCom in advert.commentaires %}#}
-		        		{#<li>{{ advCom.name }}</li>#}
-		      		{#{% endfor %}#}
-		   	 	{#</ul>#}
-			{#{% endif %}#}
+		  	{% if advert.commentaires  is not null%}
+				<ul>
+		      		{% for advCom in advert.commentaires %}
+		        		<li>{{ advCom.contenu }}</li>
+		      		{% endfor %}
+		   	 	</ul>
+			{% endif %}
 		</div>
   	</div>
   	<p>

@@ -18,11 +18,11 @@ use Symfony\Component\Validator\Context\ExecutionContextInterface;
 /**
  * Advert
  *
- * @ORM\Table(name="ref_hobbies")
- * @ORM\Entity(repositoryClass="OC\PlatformBundle\Entity\RefHobbiesRepository")
+ * @ORM\Table(name="ref_departement")
+ * @ORM\Entity(repositoryClass="OC\PlatformBundle\Entity\RefDepartementRepository")
  * @ORM\HasLifecycleCallBacks()
  */
-class RefHobbies
+class RefDepartement
 {
     /**
      * @var integer
@@ -36,11 +36,18 @@ class RefHobbies
     /**
      * @var string
      *
-     * @ORM\Column(name="preference", type="text")
+     * @ORM\Column(name="departement", type="integer")
      * @Assert\NotBlank
      */
-    private $preferences;
+    private $departement;
 
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="nom_departement", type="text")
+     * @Assert\NotBlank
+     */
+    private $nomDepartement;
     /**
      * Get id
      *
@@ -54,17 +61,40 @@ class RefHobbies
     /**
      * @return string
      */
-    public function getPreferences()
+    public function getDepartement()
     {
-        return $this->preferences;
+        return $this->departement;
     }
 
     /**
-     * @param string $preference
+     * @param string $departement
      */
-    public function setPreferences($preferences)
+    public function setDepartement($departement)
     {
-        $this->preferences = $preferences;
+        $this->departement = $departement;
     }
 
+    /**
+     * @return string
+     */
+    public function getNomDepartement()
+    {
+        return $this->nomDepartement;
+    }
+
+    /**
+     * @param string $departement
+     */
+    public function setNomDepartement($nomDepartement)
+    {
+        $this->nomDepartement = $nomDepartement;
+    }
+
+    /**
+     * @return string
+     */
+    public function getConcatenationDepartementNomDepartement() {
+
+        return $this->getDepartement(). ' - ' . $this->getNomDepartement();
+    }
 }

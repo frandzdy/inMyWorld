@@ -8,10 +8,15 @@ imports:
 parameters:
     locale: fr
     creator: "Frandzdy Sanon"
+    lopi_pusher_app_id: 314029
+    lopi_pusher_key: edf23f9f3817654963fd
+    lopi_pusher_secret: efc08668d157f53b7c1d
 
 framework:
     #esi:             ~
-    translator:      { fallbacks: ["%locale%"] }
+    translator:
+        paths:
+            - '%kernel.root_dir%/../src/OC/PlatformBundle/Resources/translations'
     secret:          "%secret%"
     router:
         resource: "%kernel.root_dir%/config/routing.yml"
@@ -106,4 +111,5 @@ liip_imagine:
                 thumbnail: { size: [10, 10], mode: inset }
             #post_processors:
                 # Prototype
-               # name:                 [] 
+               # name:                 []
+

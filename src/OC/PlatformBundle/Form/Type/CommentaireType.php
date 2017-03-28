@@ -1,6 +1,6 @@
 <?php
 
-namespace OC\PlatformBundle\Form;
+namespace OC\PlatformBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -17,7 +17,9 @@ class CommentaireType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('contenu', TextareaType::class, array('attr' => array("style" => "width:100%")))
+            ->add('commentaire', TextareaType::class, array('attr' => array("style" => "width:100%")))
+            // ->add('user')
+            // ->add('advert')
             ->add('save', SubmitType::class, array("label" => "Publié"))
         ;
     }

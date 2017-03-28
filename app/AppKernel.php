@@ -18,7 +18,6 @@ class AppKernel extends Kernel
             new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
             new OC\PlatformBundle\OCPlatformBundle(),
             new OC\UserBundle\OCUserBundle(),
-            new OC\ChatBundle\OCChatBundle(),
             new FOS\UserBundle\FOSUserBundle(),
             new Liip\ImagineBundle\LiipImagineBundle(),
             new Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle(),

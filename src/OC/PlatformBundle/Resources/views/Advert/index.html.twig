@@ -7,21 +7,27 @@
 {% endblock %}
 
 {% block ocplatform_body %}
-	{% for message in app.session.flashbag.get("notice") %}
-		<p>{{ message }}</p>
-	{% endfor%}
-  	<h2>Liste des annonces</h2>
+  	<h2>Fil d'actualité</h2>
+	<fieldset>
+		<legend> share your world :</legend>
+        {{ include("OCPlatformBundle:Advert:form.html.twig") }}
+	</fieldset>
   	<ul>
-	    {#{% for advert in listAdverts %}#}
-	      	{#<li>#}
-    			{#<a href="{{ path('oc_platform_view', {'id': advert.id}) }}">#}
-	          		{#{{ advert.content }}#}
-	        	{#</a>#}
-	        	{#par {{ advert.author }},#}
+	    {% for advert in listAdvertsUser %}
+	      	<div>
+				<span>
+					{% if advert.image.pathView is defined and advert.image.pathView != 'uploads/img/' %}
+						<img class="img-thumbnail img-responsive" src="{{ asset(advert.image.pathView) }}" style="width: 200px;height:200px;">
+					{% endif %}
+				</span>
+    			<a href="{{ path('oc_platform_view', {'id': advert.id}) }}">
+	          		{{ advert.content }}
+	        	</a>
+	        	par {{ advert.author }},
 	        	{#le {{ advert.date|date('d/m/Y') }}#}
-	      	{#</li>#}
-	    {#{% else %}#}
-	    	{#<li>Pas (encore !) d'annonces</li>#}
-	    {#{% endfor %}#}
+	      	</div>
+	    {% else %}
+	    	<li>Pas (encore !) d'annonces</li>
+	    {% endfor %}
  	</ul>
 {% endblock %}

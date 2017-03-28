@@ -1,7 +1,5 @@
 {# src/OC/PlatformBundle/Resources/views/Advert/form.html.twig #}
 
-<h3>Formulaire d'annonce</h3>
-
 <div class="well">
   {{ form_start(form, {'attr': {'class': 'form-horizontal'}}) }}
 
@@ -61,7 +59,7 @@
       	{{ form_label(form.image, "Ajouter une image :", {'label_attr': {'class': 'col-sm-3 control-label'}}) }}
       	{{ form_errors(form.image) }}
      	<div class="col-sm-9">
-        	{{ form_widget(form.image, {'attr': {'class': 'form-control'}}) }}
+        	{{ form_widget(form.image, {'attr': {'class': ''}}) }}
     	</div>
     </div>
 	
@@ -76,7 +74,7 @@
   {# Pour le bouton, pas de label ni d'erreur, on affiche juste le widget #}
   {#{{ form_widget(form.save, {'attr': {'class': 'btn btn-primary'}}) }}#}
     <div class="form-group">
-        <div class="col-sm-2 col-sm-offset-10">
+        <div class="col-sm-2 col-sm-offset-5">
             {{ form_widget(form.save, { 'label': 'Poster', 'attr': {'class': 'btn btn-primary form-control'} }) }}
         </div>
     </div>

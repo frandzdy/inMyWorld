@@ -18,11 +18,11 @@ use Symfony\Component\Validator\Context\ExecutionContextInterface;
 /**
  * Advert
  *
- * @ORM\Table(name="ref_civilite")
- * @ORM\Entity(repositoryClass="OC\PlatformBundle\Entity\RefCiviliteRepository")
+ * @ORM\Table(name="ref_sexe")
+ * @ORM\Entity(repositoryClass="OC\PlatformBundle\Entity\RefSexeRepository")
  * @ORM\HasLifecycleCallBacks()
  */
-class RefCivilite
+class RefSexe
 {
     /**
      * @var integer
@@ -36,10 +36,10 @@ class RefCivilite
     /**
      * @var string
      *
-     * @ORM\Column(name="civilite", type="text")
+     * @ORM\Column(name="sexe", type="text")
      * @Assert\NotBlank
      */
-    private $civilite;
+    private $sexe;
 
     /**
      * Get id
@@ -54,17 +54,17 @@ class RefCivilite
     /**
      * @return string
      */
-    public function getCivilite()
+    public function getSexe()
     {
-        return $this->civilite;
+        return $this->sexe;
     }
 
     /**
-     * @param string $civilite
+     * @param string $sexe
      */
-    public function setCivilite($civilite)
+    public function setSexe($sexe)
     {
-        $this->civilite = $civilite;
+        $this->sexe = $sexe;
     }
 
 }

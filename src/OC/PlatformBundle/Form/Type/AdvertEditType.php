@@ -1,11 +1,11 @@
 <?php
 
-namespace OC\UserBundle\Form;
+namespace OC\PlatformBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 
-class UserEditType extends AbstractType
+class AdvertEditType extends AbstractType
 {
     /**
      * @param FormBuilderInterface $builder
@@ -14,7 +14,7 @@ class UserEditType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-           ->remove('password')
+           ->remove('date')
         ;
     }
     /**
@@ -22,10 +22,10 @@ class UserEditType extends AbstractType
      */
     public function getName()
     {
-        return 'oc_platformbundle_user_edit';
+        return 'oc_platformbundle_advert_edit';
     }
 	
 	public function getParent(){
-		return new UserType();
+		return new AdvertType();
 	}
 }

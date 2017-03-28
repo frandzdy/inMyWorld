@@ -25,16 +25,37 @@ use Symfony\Component\HttpFoundation\ResponseHeaderBag;
 
 class AdvertController extends Controller
 {
-    public function indexAction()
+    public function indexAction(Request $request)
     {
-        $advertAll = array();
+        static $user;
+        if (empty($user)) {
+            $user = $this->getUser();
+        }
         // ...
         $em = $this->getDoctrine()->getManager();
         // on récupère notre entité selon l'id reçu
-//        $advertAll = $em->getRepository("OCPlatformBundle:Advert")->findAll();
+        $advertUser = $em->getRepository("OCPlatformBundle:Advert")->findPostUser($user->getId());
+        $advert = new Advert();
+
+        $form = $this->createForm(AdvertEditType::class, $advert);
+
+        $form->handleRequest($request);
+
+        if ($form->isValid()) {
+            $advert = $form->getData();
+            $advert->setAuthor($this->getUser());
+            $advert->setCreatedAt(new \DateTime());
+            // comme c'est le manager qui récupère l'annonce on n'a pas besoin de faire de persist sur l'objet $advert
+            // on enregistre
+            $em->persist($advert);
+            $em->flush();
+            // redirection vers la vue de l'annonce en récupérant l'id de l'advert Créer
+            return $this->redirect($this->generateUrl('oc_platform_home'));
+        }
         // Et modifiez le 2nd argument pour injecter notre liste
         return $this->render('OCPlatformBundle:Advert:index.html.twig', array(
-            'listAdverts' => $advertAll
+            'listAdvertsUser' => $advertUser,
+            'form' => $form->createView()
         ));
 
     }
@@ -61,8 +82,6 @@ class AdvertController extends Controller
     public function viewAction($id, Request $request)
     {
         $em = $this->getDoctrine()->getManager();
-
-
         $userManager = $this->getDoctrine()->getRepository('OCUserBundle:User');
 
         $user = $userManager->findById(array('id' => $id));
@@ -71,33 +90,24 @@ class AdvertController extends Controller
         $advert = $em
             ->getRepository('OCPlatformBundle:Advert')
             ->getAdvertWithCategories($id);
+
         if (null === $advert) {
             throw new NotFoundHttpException("L'annonce d'id " . $id . " n'existe pas.");
         }
-        // On récupère la liste des candidatures de cette annonce
-        // $listApplications = $em
-        // ->getRepository('OCPlatformBundle:Application')
-        // ->getApplicationsWithAdvert($advert-> getId());
+
         $listAdvertSkills = '';
-//        $listAdvertSkills = $em
-//            ->getRepository('OCPlatformBundle:AdvertSkill')
-//            ->getAllAdvertSkill($advert->getId());
-        // $listAdvertSkills = $em -> getRepository("OCPlatformBundle:AdvertSkill") -> findBy(array("advert"=>$advert));
 
         $form = $this->get('form.factory')->create(new CommentaireType(), $commentaire);
         $form->handleRequest($request);
         if ($form->isValid()) {
 
-            $commentaire = $form->getData();
-            $em = $this->getDoctrine()->getManager();
+            $advert->addCommentaire($form->getData());
 
-            // $em -> persist($commentaire);
-            // on enregistre l'annonce du commentaire et le user
-            $commentaire->setAdvert($advert);
-            foreach ($user as $row)
-                $commentaire->setUser($row);
             $em->flush();
+
+            return $this->redirect($this->generateUrl('oc_platform_view', array('id' => $id)));
         }
+
         return $this->render('OCPlatformBundle:Advert:view.html.twig', array(
             'advert' => $advert,
             "listAdvertSkills" => $listAdvertSkills,
@@ -208,9 +218,10 @@ class AdvertController extends Controller
     {
         // On crée un objet Advert
         $user = new User();
+        $options = array('translator' => $this->get('translator'));
 
         // On crée le FormBuilder grâce au service form factory
-        $form = $this->get('form.factory')->create(new UserType(), $user);
+        $form = $this->createForm(UserType::class, $user, $options);
 
         // on vérifie que le submit est valide
         $form->handleRequest($request);
@@ -220,7 +231,16 @@ class AdvertController extends Controller
             // $user->getImage()->upload();
             // on appel notre manager pour enregistrer car new Advert
             $em = $this->getDoctrine()->getManager();
-            // on persist le user
+            $password = $form->get('password')->getData();
+            $preferences = $form->get('preferences')->getData();
+
+            foreach ($preferences as $preference) {
+                $user->addPreference($preference);
+            }
+            // on persist l'annonce
+            $user->setRoles(array('ROLE_USER'))->setPlainPassword($password)
+                ->setEnabled(true);
+
             $em->persist($user);
             // on enregistre
             $em->flush();
@@ -241,21 +261,21 @@ class AdvertController extends Controller
     {
         // On crée un objet User
         $userManager = $this->get('fos_user.user_manager');
+        $options = array('translator' => $this->get('translator'));
 
         $user = $userManager->findUserBy(array('id' => $id));
         // On crée le FormBuilder grâce au service form factory
-        $form = $this->get('form.factory')->create(UserType::class, $user);
-
+        $form = $this->createForm(UserType::class, $user, $options);
+        // on récupère le mot de passe du l'utilisateur
         $password = $user->getPassword();
 
         // on vérifie que le submit est valide
         $form->handleRequest($request);
         // on vérifie que le formulaire est valide
         if ($form->isValid()) {
-//            $newPassword = $form->get('password')->getData();
-//            $oldPassword = $form->get('plainPassword')->getData();
-//            // on enregistre
-            if (!empty($form->get('password')->getData())) {
+            $newPassword = $form->get('password')->getData();
+            // on enregistre
+            if (!empty($newPassword)) {
                 // set plain permet de crypter le nouveau mot de passe
                 $user->setPlainPassword($form->get('password')->getData());
             } else {
@@ -286,6 +306,7 @@ class AdvertController extends Controller
         if ($request->isMethod("GET")) {
             $userManager->deleteUser($user);
             $request->getSession()->getFlashBag()->add('notice', 'Suppression du compte bien enregistré.');
+
             return $this->redirect($this->generateUrl('oc_platform_home'));
         }
         // return $this -> redirect($this->generateUrl('oc_platform_editUser',array('id'=>$user -> getId())));

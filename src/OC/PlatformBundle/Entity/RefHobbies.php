@@ -19,7 +19,7 @@ use Symfony\Component\Validator\Context\ExecutionContextInterface;
  * Advert
  *
  * @ORM\Table(name="ref_hobbies")
- * @ORM\Entity(repositoryClass="OC\PlatformBundle\Entity\RefhobbiesRepository")
+ * @ORM\Entity(repositoryClass="OC\PlatformBundle\Entity\RefHobbiesRepository")
  * @ORM\HasLifecycleCallBacks()
  */
 class RefHobbies
@@ -36,10 +36,10 @@ class RefHobbies
     /**
      * @var string
      *
-     * @ORM\Column(name="content", type="text")
+     * @ORM\Column(name="preference", type="text")
      * @Assert\NotBlank
      */
-    private $title;
+    private $preferences;
 
     /**
      * Get id
@@ -51,5 +51,20 @@ class RefHobbies
         return $this->id;
     }
 
+    /**
+     * @return string
+     */
+    public function getPreferences()
+    {
+        return $this->preferences;
+    }
+
+    /**
+     * @param string $preference
+     */
+    public function setPreferences($preferences)
+    {
+        $this->preferences = $preferences;
+    }
 
 }
