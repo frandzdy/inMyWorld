@@ -40,16 +40,35 @@ class AdvertRepository extends \Doctrine\ORM\EntityRepository
      * @param $id
      * @return mixed
      */
-    public function  findPostUser($id)
+    public function  findPostUser($id, $offset = 0, $limit = 5)
     {
         $qb = $this->createQueryBuilder('a')
             ->leftJoin('a.image', 'i')
             ->addSelect('i')
-            ->where("a.author = :id");
-        $qb->setParameter("id", $id);
+            ->where("a.author = :id")
+            ->setParameter("id", $id)
+            ->setFirstResult( $offset )
+            ->setMaxResults( $limit );
 
         return $qb->getQuery()->getResult();
     }
 
+
+    /**
+     * @param $id
+     * @return mixed
+     */
+    public function  findPostUserScroll($id, $offset = 0, $limit = 5)
+    {
+        $qb = $this->createQueryBuilder('a')
+            ->leftJoin('a.image', 'i')
+            ->addSelect('i')
+            ->where("a.author = :id")
+            ->setParameter("id", $id)
+            ->setFirstResult( $offset )
+            ->setMaxResults( $limit );
+
+        return $qb->getQuery()->getResult();
+    }
 }
 

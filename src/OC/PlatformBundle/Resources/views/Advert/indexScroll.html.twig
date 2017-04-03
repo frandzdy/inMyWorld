@@ -1,0 +1,17 @@
+{# src/OC/PlatformBundle/Resources/views/Advert/index.html.twig #}
+{% trans_default_domain 'message' %}
+
+{% for advert in listAdvertsUser %}
+	<div>
+		<span>
+			{% if advert.image.pathView is defined and advert.image.pathView != 'uploads/img/' %}
+				<img class="img-thumbnail img-responsive" src="{{ asset(advert.image.pathView) }}" style="width: 200px;height:200px;">
+			{% endif %}
+		</span>
+		<a href="{{ path('oc_platform_view', {'id': advert.id}) }}">
+			{{ advert.content }}
+		</a>
+		par {{ advert.author }},
+		{#le {{ advert.date|date('d/m/Y') }}#}
+	</div>
+{% endfor %}

@@ -20,6 +20,11 @@
         <![endif]-->
         <link rel="stylesheet" href="{{ asset('bootstrap/css/bootstrap.min.css') }}">
         <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+
+        {#{% stylesheets '@OCPlatformBundle/Resources/public/css/main.css' %}#}
+            {#<link rel="stylesheet" href="{{ asset_url }}" type="text/css" />#}
+        {#{% endstylesheets %}#}
+
         <style type="text/css">
             body {
                 padding-top: 70px;
@@ -119,6 +124,8 @@
 </div>
 
 {% block javascripts %}
+    <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
+    <script src="{{ path('fos_js_routing_js', { callback: 'fos.Router.setData' }) }}"></script>
     {# Ajoutez ces lignes JavaScript si vous comptez vous servir des fonctionnalités du bootstrap Twitter #}
     <script src="{{ asset('bootstrap/js/jquery-2.1.4.js') }}"></script>
 
@@ -126,32 +133,8 @@
 
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-    <script src="i18n/datepicker-fr.js"></script>
     <script type="text/javascript">
         $(function () {
-            $('#send').click(function () {
-                var text = $('#textSend').val().toString();
-                var url = $('#urlAjaxChat').val().toString();
-                $(this).addClass('btn-primary');
-                alert(text);
-
-                $.ajax({
-                    url: url,
-                    method: "POST",
-                    data: {text: text},
-                    dataType: "json"
-                }).done(function (data) {
-                    alert("success" + data.text);
-                    $('#sourceChat').append(data.text);
-                })
-                    .fail(function () {
-                        alert("error");
-                    })
-                    .always(function () {
-                        alert("complete");
-                    });
-
-            });
             $( ".datepicker" ).datepicker(
                 {
                 altField: ".datepicker",
@@ -170,6 +153,9 @@
             );
         });
     </script>
+    {% javascripts '@OCPlatformBundle/Resources/public/js/actualite.js' %}
+        <script type="text/javascript" src="{{ asset_url }}"></script>
+    {% endjavascripts %}
 {% endblock %}
 
 </body>

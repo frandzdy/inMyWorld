@@ -1,4 +1,11 @@
-lg_preferences: Préférences
-lg_civilite: Sexe
-lg_departement: Département
-lg_preferenceDepartements: Département de recherche
+lg:
+    fil_actualite: "Fil d'actualité"
+    preferences: "Vos préférences"
+    passe_temps: "Passe temps"
+    civilite: "Civilité"
+    preferences_civilite: "Civilité de recherche"
+    departement: "Département"
+    preferences_departements: "Département de recherche"
+    partage_ton_monde: "Partage ton monde"
+    fun_message: "Rock your World"
+    creation_compte: "Création d'un compte"

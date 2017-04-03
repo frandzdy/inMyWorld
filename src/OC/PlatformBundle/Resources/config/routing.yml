@@ -4,6 +4,14 @@ oc_platform_home:
     path:      /
     defaults:  { _controller: OCPlatformBundle:Advert:index }
 
+oc_platform_scroll:
+    path:      /{page}
+    defaults:  { _controller: OCPlatformBundle:Advert:indexScroll }
+    requirements:
+        page: \d+
+    options:
+        expose: true
+
 oc_platform_view:
     path:      /advert/{id}
     defaults:  { _controller: OCPlatformBundle:Advert:view }

@@ -1,12 +1,10 @@
 {# src/OC/PlatformBundle/Resources/views/layout.html.twig #}
 
-
 {% extends "::layout.html.twig" %}
-
+{% trans_default_domain 'message' %}
 
 {% block title %}
-
-  Rock Your World - {{ parent() }}
+  {{ "lg.fun_message"|trans }} - {{ parent() }}
 
 {% endblock %}
 

@@ -1,9 +1,10 @@
 {# src/OC/PlatformBundle/Resources/views/Advert/edit.html.twig #}
 
 {% extends "OCPlatformBundle::layout.html.twig" %}
+{% trans_default_domain 'message' %}
 
 {% block title %}
-  Création d'un compte - {{ parent() }}
+  {{  "lg.creation_compte"|trans }} - {{ parent() }}
 {% endblock %}
 
 {% block ocplatform_body %}

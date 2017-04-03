@@ -1,13 +1,12 @@
 {# src/OC/PlatformBundle/Resources/views/Advert/form.html.twig #}
-
 {# Déclaration de variable #}
 {% set tailleChamp = 7 %}
-
+{% trans_default_domain 'message' %}
 
 {% if user.id is not null %}
     <h3>Modification d'un compte</h3>
 {% else %}
-    <h3>Création d'un compte</h3>
+    <h3>{{ "lg.creation_compte"|trans }}</h3>
 {% endif %}
 
 <div class="well">
@@ -19,7 +18,7 @@
         <div class="col-md-9">
             <div class="form-group">
                 {# Génération du label. #}
-                {{ form_label(form.civilite, "lg_civilite", {'label_attr': {'class': 'col-sm-3 control-label'}}) }}
+                {{ form_label(form.civilite, "lg.civilite"|trans , {'label_attr': {'class': 'col-sm-3 control-label'}}) }}
                 {# Affichage des erreurs pour ce champ précis. #}
                 {{ form_errors(form.civilite) }}
                 <div class="col-sm-4">
@@ -58,7 +57,7 @@
             {#</div>#}
             {#</div>#}
             <div class="form-group">
-                {{ form_label(form.departement, 'lg_departement'|trans, {'label_attr': {'class': 'col-sm-3 control-label'}}) }}
+                {{ form_label(form.departement, 'lg.departement'|trans, {'label_attr': {'class': 'col-sm-3 control-label'}}) }}
                 {{ form_errors(form.departement) }}
                 <div class="col-sm-4">
                     {{ form_widget(form.departement, {'attr': {'class': 'form-control'}}) }}
@@ -66,7 +65,7 @@
             </div>
             <div class="form-group">
                 {# Génération du label. #}
-                {{ form_label(form.dateNaissance, "lg_date_naissance", {'label_attr': {'class': 'col-sm-3 control-label'}}) }}
+                {{ form_label(form.dateNaissance, "lg.date_naissance"|trans , {'label_attr': {'class': 'col-sm-3 control-label'}}) }}
                 {# Affichage des erreurs pour ce champ précis. #}
                 {{ form_errors(form.dateNaissance) }}
                 <div class="col-sm-4">
@@ -114,27 +113,27 @@
                 {{ form_label(form.image.file, "Photo profile :", {'label_attr': {'class': 'col-sm-3 control-label'}}) }}
                 {{ form_errors(form.image.file) }}
                 <div class="col-sm-4">
-                    {{ form_widget(form.image.file, {'attr': {'class': 'form-control'}}) }}
+                    {{ form_widget(form.image.file, {'attr': {'class': ''}}) }}
                 </div>
             </div>
             <fieldset>
-                <legend>{{ 'lg_preferences'|trans }}</legend>
+                <legend>{{ 'lg.preferences'|trans }}</legend>
                 <div class="form-group">
-                    {{ form_label(form.preferences, 'lg_preferences'|trans, {'label_attr': {'class': 'col-sm-3 control-label'}}) }}
+                    {{ form_label(form.preferences, 'lg.passe_temps'|trans, {'label_attr': {'class': 'col-sm-3 control-label'}}) }}
                     {{ form_errors(form.preferences) }}
                     <div class="col-sm-4">
                         {{ form_widget(form.preferences, {'attr': {'class': ''}}) }}
                     </div>
                 </div>
                 <div class="form-group">
-                    {{ form_label(form.preferenceDepartements, ''|trans, {'label_attr': {'class': 'col-sm-3 control-label'}}) }}
+                    {{ form_label(form.preferenceDepartements, 'lg.preferences_departements'|trans, {'label_attr': {'class': 'col-sm-3 control-label'}}) }}
                     {{ form_errors(form.preferenceDepartements) }}
                     <div class="col-sm-4">
                         {{ form_widget(form.preferenceDepartements, {'attr': {'class': ''}}) }}
                     </div>
                 </div>
                 <div class="form-group">
-                    {{ form_label(form.preferenceSexes, '', {'label_attr': {'class': 'col-sm-3 control-label'}}) }}
+                    {{ form_label(form.preferenceSexes, 'lg.preferences_civilite'|trans, {'label_attr': {'class': 'col-sm-3 control-label'}}) }}
                     {{ form_errors(form.preferenceSexes) }}
                     <div class="col-sm-4">
                         {{ form_widget(form.preferenceSexes, {'attr': {'class': ''}}) }}

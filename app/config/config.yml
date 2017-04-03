@@ -11,6 +11,7 @@ parameters:
     lopi_pusher_app_id: 314029
     lopi_pusher_key: edf23f9f3817654963fd
     lopi_pusher_secret: efc08668d157f53b7c1d
+    limite_pagination: 5
 
 framework:
     #esi:             ~

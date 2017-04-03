@@ -1,15 +1,15 @@
 {# src/OC/PlatformBundle/Resources/views/Advert/index.html.twig #}
-
 {% extends "OCPlatformBundle::layout.html.twig" %}
+{% trans_default_domain 'message' %}
 
 {% block title %}
   Accueil - {{ parent() }}
 {% endblock %}
 
 {% block ocplatform_body %}
-  	<h2>Fil d'actualité</h2>
+  	<h2>{{ "lg.fil_actualite"|trans }}</h2>
 	<fieldset>
-		<legend> share your world :</legend>
+		<legend>{{ "lg.partage_ton_monde"|trans }}</legend>
         {{ include("OCPlatformBundle:Advert:form.html.twig") }}
 	</fieldset>
   	<ul>
