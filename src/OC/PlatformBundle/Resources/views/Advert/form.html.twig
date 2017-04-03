@@ -1,5 +1,5 @@
 {# src/OC/PlatformBundle/Resources/views/Advert/form.html.twig #}
-
+{% trans_default_domain 'message' %}
 <div class="well">
   {{ form_start(form, {'attr': {'class': 'form-horizontal'}}) }}
 
@@ -56,10 +56,10 @@
     {#</div>#}
 
   	<div class="form-group">
-      	{{ form_label(form.image, "Ajouter une image :", {'label_attr': {'class': 'col-sm-3 control-label'}}) }}
-      	{{ form_errors(form.image) }}
+      	{{ form_label(form.image.file, "Ajouter une image :", {'label_attr': {'class': 'col-sm-3 control-label'}}) }}
+      	{{ form_errors(form.image.file) }}
      	<div class="col-sm-9">
-        	{{ form_widget(form.image, {'attr': {'class': ''}}) }}
+        	{{ form_widget(form.image.file, {'attr': {'class': ''}}) }}
     	</div>
     </div>
 	

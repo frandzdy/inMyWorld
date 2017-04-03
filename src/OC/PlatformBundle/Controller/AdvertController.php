@@ -16,6 +16,7 @@ use OC\PlatformBundle\Form\CommentaireType;
 use OC\UserBundle\Form\UserType;
 use OC\UserBundle\Form\UserEditType;
 
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -27,10 +28,7 @@ class AdvertController extends Controller
 {
     public function indexAction(Request $request)
     {
-        static $user;
-        if (empty($user)) {
-            $user = $this->getUser();
-        }
+        $user = $this->getUser();
         // ...
         $em = $this->getDoctrine()->getManager();
         // on récupère notre entité selon l'id reçu
@@ -58,6 +56,31 @@ class AdvertController extends Controller
             'form' => $form->createView()
         ));
 
+    }
+
+    /**
+     * @param Request $request
+     * @return Response
+     */
+    public function indexScrollAction(Request $request)
+    {
+        $page = $request->get('page', 1);
+        $pageSetResult = $page * $this->getParameter('limite_pagination');
+        $user = $this->getUser();
+        // ...
+        $em = $this->getDoctrine()->getManager();
+        // on récupère notre entité selon l'id reçu
+        $advertUser = $em->getRepository("OCPlatformBundle:Advert")->findPostUser($user->getId(), $pageSetResult);
+
+        // Et modifiez le 2nd argument pour injecter notre liste
+        return new JsonResponse(
+            array(
+                'view' => $this->renderView('OCPlatformBundle:Advert:indexScroll.html.twig', array(
+                        'listAdvertsUser' => $advertUser,
+                    )
+                ),
+                'last_page' => $page
+            ));
     }
 
     public function menuAction()
@@ -197,7 +220,8 @@ class AdvertController extends Controller
             $em->remove($advert);
             $em->flush();
             // Message
-            $request->getSession()->getFlashBag()->add('notice', 'L\'annonce numéro ' . $id . ' vient d\'être supprimer.');
+            $request->getSession()->getFlashBag()->add('notice',
+                'L\'annonce numéro ' . $id . ' vient d\'être supprimer.');
             // redirection vers la page d'accueil
             return $this->redirect($this->generateUrl('oc_platform_home'));
         }
@@ -351,7 +375,8 @@ class AdvertController extends Controller
             $searchValue = $request->request->get('search');
             $adverts = $em->getRepository("OCPlatformBundle:Advert")->getSearch($searchValue);
             if (null !== $adverts) {
-                return $this->render('OCPlatformBundle:Advert:afficheSearch.html.twig', array('adverts' => $adverts, 'search' => $searchValue));
+                return $this->render('OCPlatformBundle:Advert:afficheSearch.html.twig',
+                    array('adverts' => $adverts, 'search' => $searchValue));
             } else {
                 $request->getSession()->getFlashbag()->add('notice', 'Aucun résultat');
                 return $this->redirect($this->generateUrl('oc_platform_home'));
@@ -365,7 +390,8 @@ class AdvertController extends Controller
     {
 
         /** Include PHPExcel */
-        require_once str_replace('src\OC\PlatformBundle\Controller', '', dirname(__FILE__)) . 'vendor/phpOffice/phpexcel/Classes/PHPExcel.php';
+        require_once str_replace('src\OC\PlatformBundle\Controller', '',
+                dirname(__FILE__)) . 'vendor/phpOffice/phpexcel/Classes/PHPExcel.php';
         // print str_replace('src\OC\PlatformBundle\Controller','',dirname(__FILE__)) . 'vendor/phpOffice/phpexcel/Classes/PHPExcel.php';
         // die;
         //	Change these values to select the PDF Rendering library that you wish to use
@@ -414,7 +440,8 @@ class AdvertController extends Controller
             } else {
                 $objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'PDF');
                 $objWriter->save(str_replace('.php', '.pdf', __FILE__));
-                echo date('H:i:s'), " File written to ", str_replace('.php', '.pdf', pathinfo(__FILE__, PATHINFO_BASENAME)), EOL;
+                echo date('H:i:s'), " File written to ", str_replace('.php', '.pdf',
+                    pathinfo(__FILE__, PATHINFO_BASENAME)), EOL;
             }
         } catch (Exception $e) {
             echo date('H:i:s'), ' EXCEPTION: ', $e->getMessage(), EOL;
@@ -427,12 +454,14 @@ class AdvertController extends Controller
         echo date('H:i:s'), " Write to CSV format", EOL;
         $objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'CSV');
         $objWriter->save(str_replace('.php', '.csv', __FILE__));
-        echo date('H:i:s'), " File written to ", str_replace('.php', '.csv', pathinfo(__FILE__, PATHINFO_BASENAME)), EOL;
+        echo date('H:i:s'), " File written to ", str_replace('.php', '.csv',
+            pathinfo(__FILE__, PATHINFO_BASENAME)), EOL;
         // Export to CSV with BOM (.csv)
         echo date('H:i:s'), " Write to CSV format (with BOM)", EOL;
         $objWriter->setUseBOM(true);
         $objWriter->save(str_replace('.php', '-bom.csv', __FILE__));
-        echo date('H:i:s'), " File written to ", str_replace('.php', '-bom.csv', pathinfo(__FILE__, PATHINFO_BASENAME)), EOL;
+        echo date('H:i:s'), " File written to ", str_replace('.php', '-bom.csv',
+            pathinfo(__FILE__, PATHINFO_BASENAME)), EOL;
         // Echo memory peak usage
         echo date('H:i:s'), " Peak memory usage: ", (memory_get_peak_usage(true) / 1024 / 1024), " MB", EOL;
         // Echo done

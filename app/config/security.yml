@@ -32,7 +32,7 @@ security:
                 key: %secret%
                 lifetime: 604800 # 1 week in seconds
                 path:     /platform
-                #always_remember_me: true
+                always_remember_me: true
     access_control:
         - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY  } # requires_channel: https
         - { path: ^/platform/create, roles: IS_AUTHENTICATED_ANONYMOUSLY } # , requires_channel: https
