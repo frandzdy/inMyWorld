@@ -6,16 +6,14 @@ php:
 
 env:
   - SYMFONY_VERSION=2.8.*
-  - SYMFONY_VERSION=3.*
-#
 #services:
 #  - mysql
 #
-before_install:
-  - mysql -u symfony -e "create database IF NOT EXISTS world;" -uroot
-
-install:
-    - composer install --no-interaction
+#before_install:
+#  - mysql -u root -e "create database IF NOT EXISTS symfony;" -uroot
+#
+#install:
+#    - composer install --no-interaction
 #    - php app/console doctrine:fixtures:load --no-interaction
 #    - bin/phpunit src/
 
