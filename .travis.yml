@@ -17,6 +17,7 @@ env:
 #    - php app/console doctrine:fixtures:load --no-interaction
 #    - bin/phpunit src/
 
+
 notifications:
   email:
     - frandzdypro@gmail.com
