@@ -3,7 +3,6 @@
 namespace OC\PlatformBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use OC\PlatformBundle\Entity\SuperMappedClass\ref_date;
 
 /**
  * Commentaire
@@ -11,7 +10,7 @@ use OC\PlatformBundle\Entity\SuperMappedClass\ref_date;
  * @ORM\Table()
  * @ORM\Entity(repositoryClass="OC\PlatformBundle\Entity\CommentaireRepository")
  */
-class Commentaire extends ref_date
+class Commentaire
 {
     /**
      * @var integer
@@ -40,19 +39,27 @@ class Commentaire extends ref_date
     }
 
     /**
-     * @return mixed
+     * Set commentaire
+     *
+     * @param string $commentaire
+     *
+     * @return commentaire
      */
-    public function getAdvert()
+    public function setCommentaire($contenu)
     {
-        return $this->advert;
+        $this->contenu = $contenu;
+
+        return $this;
     }
 
     /**
-     * @param mixed $post
+     * Get commentaire
+     *
+     * @return string
      */
-    public function setAdvert($advert)
+    public function getCommentaire()
     {
-        $this->advert = $advert;
+        return $this->contenu;
     }
 
     /**
