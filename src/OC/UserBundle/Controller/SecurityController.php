@@ -11,9 +11,8 @@ class SecurityController extends Controller
 {
     public function loginAction(Request $request)
     {
-        ;
         // Si le visiteur est déjà identifié, on le redirige vers l'accueil
-        if ($this->isGranted('IS_AUTHENTICATED_FULLY')) {
+        if ($this->isGranted('IS_AUTHENTICATED_REMEMBERED')) {
             return $this->redirectToRoute('oc_platform_home');
         }
 
