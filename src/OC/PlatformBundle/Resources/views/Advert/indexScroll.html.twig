@@ -2,16 +2,21 @@
 {% trans_default_domain 'message' %}
 
 {% for advert in listAdvertsUser %}
-	<div>
-		<span>
-			{% if advert.image.pathView is defined and advert.image.pathView != 'uploads/img/' %}
-				<img class="img-thumbnail img-responsive" src="{{ asset(advert.image.pathView) }}" style="width: 200px;height:200px;">
-			{% endif %}
-		</span>
-		<a href="{{ path('oc_platform_view', {'id': advert.id}) }}">
-			{{ advert.content }}
-		</a>
-		par {{ advert.author }},
-		{#le {{ advert.date|date('d/m/Y') }}#}
+	<div class="panel panel-info">
+		<!-- Default panel contents -->
+		<div class="panel-heading">{{ advert.author }} a publié</div>
+		<div class="panel-body">
+                <span class="">
+					{% if advert.image.pathView is defined and advert.image.pathView != 'uploads/img/' %}
+						<img class="img-thumbnail img-responsive" src="{{ asset(advert.image.pathView) }}"
+							 style="width: 200px;height:200px;">
+                    {% endif %}
+				</span>
+			<a href="{{ path('oc_platform_view', {'id': advert.id}) }}">
+				<p>
+                    {{ advert.content }}
+				</p>
+			</a>
+		</div>
 	</div>
 {% endfor %}
