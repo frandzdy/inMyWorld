@@ -36,7 +36,7 @@ class Advert
     /**
      * @var string
      *
-     * @ORM\ManyToOne(targetEntity="\OC\UserBundle\Entity\User")
+     * @ORM\ManyToOne(targetEntity="\OC\UserBundle\Entity\User", cascade={"remove"})
      */
     private $author;
 

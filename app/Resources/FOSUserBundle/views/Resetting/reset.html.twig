@@ -1,0 +1,11 @@
+{% trans_default_domain 'FOSUserBundle' %}
+
+{% extends "OCPlatformBundle::layout.html.twig" %}
+
+{% block title %}
+    Réinitialisation du mot de passe - {{ parent() }}
+{% endblock %}
+
+{% block body %}
+    {% include "FOSUserBundle:Resetting:reset_content.html.twig" %}
+{% endblock %}

@@ -6,7 +6,6 @@ var last_page = false;
 var page = 1;
     function addMoreElements() {
         is_processing = true;
-
     }
 
     $(window).scroll(function() {

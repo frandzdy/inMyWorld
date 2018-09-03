@@ -47,8 +47,8 @@ class AdvertRepository extends \Doctrine\ORM\EntityRepository
             ->addSelect('i')
             ->where("a.author = :id")
             ->setParameter("id", $id)
-//            ->setFirstResult($offset)
-//            ->setMaxResults($limit)
+            ->setFirstResult($offset)
+            ->setMaxResults($limit)
             ->orderBy('a.createdAt', 'DESC');
 
         return $qb->getQuery()->getResult();
