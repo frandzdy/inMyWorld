@@ -23,11 +23,15 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\HttpFoundation\ResponseHeaderBag;
 
-
 class AdvertController extends Controller
 {
+    /**
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|Response
+     */
     public function indexAction(Request $request)
     {
+
         $user = $this->getUser();
         // ...
         $em = $this->getDoctrine()->getManager();
@@ -105,9 +109,8 @@ class AdvertController extends Controller
     public function viewAction($id, Request $request)
     {
         $em = $this->getDoctrine()->getManager();
-        $userManager = $this->getDoctrine()->getRepository('OCUserBundle:User');
 
-        $user = $userManager->findById(array('id' => $id));
+        $user = $this->getUser();
         // On récupère l'annonce $id
         $commentaire = new Commentaire();
         $advert = $em
@@ -125,7 +128,9 @@ class AdvertController extends Controller
         if ($form->isValid()) {
 
             $advert->addCommentaire($form->getData());
-
+            $commentaire->setAuthor($user);
+            $commentaire->setCreatedAt(new \DateTime('now'));
+            $commentaire->setUpdatedAt(new \DateTime('now'));
             $em->flush();
 
             return $this->redirect($this->generateUrl('oc_platform_view', array('id' => $id)));

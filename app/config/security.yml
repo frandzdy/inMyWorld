@@ -23,11 +23,11 @@ security:
                 login_path: fos_user_security_login
                 check_path: fos_user_security_check
                 always_use_default_target_path : true
-                default_target_path: /platform
-                use_referer : true
+                default_target_path: fos_user_security_login
+#                use_referer : true
             logout:
                 path:   fos_user_security_logout
-                target: /platform
+                target: fos_user_security_login
             remember_me:
                 key: %secret%
                 lifetime: 604800 # 1 week in seconds
@@ -35,6 +35,7 @@ security:
                 #always_remember_me: true
     access_control:
         - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY  } # requires_channel: https
+        - { path: ^/request, roles: IS_AUTHENTICATED_ANONYMOUSLY  } # requires_channel: https
         - { path: ^/platform/create, roles: IS_AUTHENTICATED_ANONYMOUSLY } # , requires_channel: https
-        - { path: ^/, roles: IS_AUTHENTICATED_REMEMBERED }
+        - { path: ^/, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         # tous le site nécessite une connexion en base

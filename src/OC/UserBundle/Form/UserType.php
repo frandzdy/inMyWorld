@@ -92,7 +92,7 @@ class UserType extends AbstractType
 //                        return $repository->findTiersFactureQuery($userId, $commercialId);
 //                    },
                     'property' => 'concatenationDepartementNomDepartement',
-                    'empty_value' => 'lg_choisissez',
+                    'empty_value' => $translator->trans('lg.choisissez'),
 //                    'cascade_validation' => false,
                     'expanded' => false,
                     'multiple' => false,
@@ -117,12 +117,12 @@ class UserType extends AbstractType
             ->add('preferenceSexes', EntityType::class,
                 array(
                     'label' => $translator->trans('lg_sexe'),
-                    'class' => 'OC\PlatformBundle\Entity\RefSexe',
+                    'class' => 'OC\PlatformBundle\Entity\RefCivilite',
                     //                    'query_builder' => function($repository) use ($userId, $commercialId) {
                     //                        return $repository->findTiersFactureQuery($userId, $commercialId);
                     //                    },
-                    'property' => 'sexe',
-                    'empty_value' => 'lg_choisissez',
+                    'property' => 'civilite',
+                    'empty_value' => $translator->trans('lg.choisissez'),
                     //                    'cascade_validation' => false,
                     'expanded' => true,
                     'multiple' => true,

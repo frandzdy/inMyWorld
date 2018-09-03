@@ -3,6 +3,7 @@
 namespace OC\PlatformBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use OC\UserBundle\Entity\User;
 
 /**
  * Commentaire
@@ -27,6 +28,23 @@ class Commentaire
      * @ORM\Column(name="contenu", type="string", length=500)
      */
     private $contenu;
+
+    /**
+     * @var string
+     *
+     * @ORM\ManyToOne(targetEntity="\OC\UserBundle\Entity\User", cascade={"remove"})
+     */
+    private $author;
+
+    /**
+     * @ORM\Column(name="created_at",type="datetime", nullable=true)
+     */
+    private $createdAt;
+
+    /**
+     * @ORM\Column(name="updated_at",type="datetime", nullable=true)
+     */
+    private $updatedAt;
 
     /**
      * Get id
@@ -85,4 +103,53 @@ class Commentaire
     {
         return $this->contenu;
     }
+
+    /**
+     * @return string
+     */
+    public function getAuthor()
+    {
+        return $this->author;
+    }
+
+    /**
+     * @param string $author
+     */
+    public function setAuthor(User $author)
+    {
+        $this->author = $author;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCreatedAt()
+    {
+        return $this->createdAt;
+    }
+
+    /**
+     * @param mixed $createdAt
+     */
+    public function setCreatedAt($createdAt)
+    {
+        $this->createdAt = $createdAt;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getUpdatedAt()
+    {
+        return $this->updatedAt;
+    }
+
+    /**
+     * @param mixed $updatedAt
+     */
+    public function setUpdatedAt($updatedAt)
+    {
+        $this->updatedAt = $updatedAt;
+    }
+
 }

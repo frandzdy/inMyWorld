@@ -80,7 +80,7 @@ class User extends BaseUser
     /**
      * @var string
      *
-     * @ORM\ManyToMany(targetEntity="OC\PlatformBundle\Entity\RefSexe")
+     * @ORM\ManyToMany(targetEntity="OC\PlatformBundle\Entity\RefCivilite")
      * @Assert\Valid()
      */
     private $preferenceSexes;
@@ -262,41 +262,29 @@ class User extends BaseUser
     {
         return $this->dateNaissance;
     }
-
     /**
-     * Add preferenceDepartement
+     * Set civilite
      *
-     * @param \OC\PlatformBundle\Entity\RefDepartement $preferenceDepartement
+     * @param \OC\PlatformBundle\Entity\RefCivilite $civilite
      *
-     * @return User
+     * @return RefCivilite
      */
-    public function addPreferenceSexe(\OC\PlatformBundle\Entity\RefSexe $preferenceSexe)
+    public function setPreferenceSexes(\OC\PlatformBundle\Entity\RefCivilite $preferenceSexes)
     {
-        $this->preferenceSexes[] = $preferenceSexe;
+        $this->preferenceSexes = $preferenceSexes;
 
         return $this;
     }
 
     /**
-     * Remove preferenceDepartement
+     * Get Civilite
      *
-     * @param \OC\PlatformBundle\Entity\RefDepartement $preferenceDepartement
-     */
-    public function removePreferenceSexe(\OC\PlatformBundle\Entity\RefSexe $preferenceSexe)
-    {
-        $this->preferenceSexes->removeElement($preferenceSexe);
-    }
-
-    /**
-     * Get preferenceDepartements
-     *
-     * @return \Doctrine\Common\Collections\Collection
+     * @return \OC\PlatformBundle\Entity\RefCivilite
      */
     public function getPreferenceSexes()
     {
         return $this->preferenceSexes;
     }
-
     /**
      * @return mixed
      */

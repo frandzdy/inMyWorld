@@ -38,15 +38,14 @@
   	
   	<div class="well">
   		<h4>Commentaires :</h4>
-	  	<div class="well">
-		  	{% if advert.commentaires  is not null%}
-				<ul>
-		      		{% for advCom in advert.commentaires %}
-		        		<li>{{ advCom.contenu }}</li>
-		      		{% endfor %}
-		   	 	</ul>
-			{% endif %}
-		</div>
+		{% if advert.commentaires  is not null%}
+			{% for advCom in advert.commentaires %}
+				<div class="well">
+					<p>{{ advCom.contenu }}</p>
+					<aside>{{ advCom.author.lastname|default ~ ' ' ~ advCom.author.username|default|capitalize }}, le {{ advCom.createdAt|default|date('d/m/Y H:i') }}</aside>
+				</div>
+			{% endfor %}
+		{% endif %}
   	</div>
   	<p>
     	<a href="{{ path('oc_platform_home') }}" class="btn btn-default">

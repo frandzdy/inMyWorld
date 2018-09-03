@@ -8,19 +8,6 @@
             "SymfonyStandard\\": "app/SymfonyStandard/"
         }
     },
-	"repositories": [
-        {
-            "type": "package",
-            "package": {
-                "name": "jquery/jquery",
-                "version": "1.10.2",
-                "dist": {
-                    "url": "http://code.jquery.com/jquery-1.10.2.js",
-                    "type": "file"
-                }
-            }
-        }
-    ],
     "require": {
         "php": ">=5.3.9",
         "symfony/symfony": "2.8.*",
@@ -37,7 +24,9 @@
         "symfony/framework-bundle": "~2.3",
         "imagine/Imagine": ">=0.2.8",
         "phpunit/phpunit": "4.*",
-        "doctrine/doctrine-fixtures-bundle": "^2.3"
+        "doctrine/doctrine-fixtures-bundle": "^2.3",
+        "friendsofsymfony/jsrouting-bundle": "^1.6",
+        "wisembly/elephant.io": "~3.0"
     },
     "require-dev": {
         "sensio/generator-bundle": "~2.3"
